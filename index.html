@@ -12,40 +12,45 @@
        TOKENS  — TAIMA brand, reference measurements
        ───────────────────────────────────────────── */
     :root {
-      /* TAIMA brand */
-      --brown:        #937d61;
-      --brown-dk:     #7a6550;
-      --brown-lt:     #c8beab;
-      --black:        #000000;
-      --near-black:   #0f0f0f;
+      /* ── TAIMA BRANDBOOK EXACT COLORS ──────────── */
+      --brown:        #937d61;   /* announcement bar bg */
+      --brown-dk:     #7a6550;   /* hover on brown */
+      --brown-lt:     #c8beab;   /* announcement bar text */
+      --black:        #000000;   /* primary CTA button bg */
+      --near-black:   #121212;   /* TAIMA primary text rgb(18,18,18) */
+      --green:        #34aa4c;   /* TAIMA CTA green (dark sections) */
+      --green-dk:     #278c3a;   /* green hover */
+      --badge-red:    #932933;   /* TAIMA sale badge exact */
+      --badge-text:   #c8beab;   /* TAIMA sale badge text */
 
-      /* Reference-derived (body/content) */
-      --body-color:   #515151;   /* rgb(81,81,81) — reference body text */
-      --head-color:   #0f0f0f;   /* reference H2 color */
+      /* Body / Content */
+      --body-color:   #515151;   /* body paragraph text */
+      --head-color:   #121212;   /* headlines */
       --bg:           #ffffff;   /* NON-NEGOTIABLE white */
-      --divider:      #ccc9ac;   /* rgb(204,201,172) — reference divider/border */
+      --divider:      #ccc9ac;
 
-      /* Testimonial exact-match from reference */
-      --test-bg:      #efefef;   /* rgb(239,240,240) */
+      /* Testimonials */
+      --test-bg:      #efefef;
       --test-border:  #ccc9ac;
-      --test-star:    #EEB611;   /* rgb(238,182,17) */
-      --test-author:  #937d61;   /* TAIMA brown replaces reference blue */
-      --test-quote:   #7f7f7f;
+      --test-star:    #fecb00;   /* TAIMA yellow badge exact */
+      --test-author:  #937d61;
+      --test-quote:   #6b6b6b;
 
-      /* Alert / callout */
+      /* Alert / Danger */
       --alert-bg:     #1a1a1a;
-      --danger:       #c0392b;
-      --danger-bg:    #fdf2f1;
-      --success:      #2d7d46;
+      --danger:       #932933;   /* unified to TAIMA badge red */
+      --danger-warn:  #c0392b;   /* warning text (slightly brighter) */
+      --danger-bg:    #fff8f8;
 
       /* Layout */
       --article-max:  680px;
       --sidebar-w:    280px;
       --gap:          28px;
-      --top-h:        64px;
+      --ann-h:        40px;      /* sticky announcement bar height */
       --bot-h:        68px;
 
-      /* Typography */
+      /* Typography — Poppins ONLY per TAIMA brandbook */
+      --font:         'Poppins', sans-serif;
       --serif:        'Poppins', sans-serif;
       --sans:         'Poppins', sans-serif;
     }
@@ -53,13 +58,39 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: var(--sans);
+      font-family: var(--font);
       background: var(--bg);
       color: var(--body-color);
       line-height: 1.78;
       -webkit-font-smoothing: antialiased;
+      padding-top: var(--ann-h);
       padding-bottom: var(--bot-h);
     }
+
+    /* ─────────────────────────────────────────────
+       STICKY ANNOUNCEMENT BAR — TAIMA brandbook
+       #937d61 bg / #c8beab text / uppercase Poppins
+       ───────────────────────────────────────────── */
+    .ann-bar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 500;
+      height: var(--ann-h);
+      background: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+    }
+    .ann-bar span {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--brown-lt);
+      text-align: center;
+    }
+    .ann-bar strong { color: #fff; font-weight: 700; }
 
     /* ─────────────────────────────────────────────
        URGENCY BANNER (inline, yellow)
@@ -77,8 +108,8 @@
       line-height: 1.55;
       color: #3a2a00;
     }
-    .urgency-inner strong.tag { color: #c0392b; font-weight: 800; }
-    .urgency-inner strong.hl  { color: #c0392b; font-weight: 700; }
+    .urgency-inner strong.tag { color: var(--danger); font-weight: 800; }
+    .urgency-inner strong.hl  { color: var(--danger); font-weight: 700; }
 
     /* ─────────────────────────────────────────────
        FIXED BOTTOM CTA BAR
@@ -414,7 +445,7 @@
       border-bottom: 1px solid #f5e0e0;
       font-size: 15px;
       font-weight: 600;
-      color: #c0392b;
+      color: var(--danger-warn);
     }
     .health-risk-box li:last-child { border-bottom: none; }
     .health-risk-box li .warn-icon { font-size: 17px; flex-shrink: 0; }
@@ -427,7 +458,7 @@
       font-size: 14px;
     }
     .comp-table thead th {
-      background: #111;
+      background: var(--near-black);
       color: #fff;
       text-align: left;
       padding: 10px 14px;
@@ -441,18 +472,18 @@
     .comp-table td { padding: 13px 14px; vertical-align: top; line-height: 1.55; }
     .comp-table .ct-name {
       display: flex; align-items: flex-start; gap: 8px;
-      font-weight: 700; color: #111; white-space: nowrap;
+      font-weight: 700; color: var(--near-black); white-space: nowrap;
       min-width: 160px;
     }
-    .ct-icon-bad  { color: #c0392b; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-    .ct-icon-good { color: #27ae60; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-    .comp-table .ct-prob-bad  { color: #c0392b; font-weight: 500; }
-    .comp-table .ct-prob-good { color: #27ae60; font-weight: 500; }
+    .ct-icon-bad  { color: var(--danger-warn); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .ct-icon-good { color: var(--green); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .comp-table .ct-prob-bad  { color: var(--danger-warn); font-weight: 500; }
+    .comp-table .ct-prob-good { color: var(--green); font-weight: 500; }
 
     /* ── Mid-article Offer Box (redesigned) ── */
     .mid-offer {
       position: relative;
-      border: 1.5px dashed #c0392b;
+      border: 1.5px dashed var(--danger);
       background: #fff;
       border-radius: 6px;
       padding: 28px 20px 22px;
@@ -463,11 +494,12 @@
       top: -16px;
       left: 50%;
       transform: translateX(-50%);
-      background: #c0392b;
-      color: #fff;
+      background: var(--danger);
+      color: var(--badge-text);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: .06em;
+      letter-spacing: .08em;
+      text-transform: uppercase;
       padding: 6px 18px;
       border-radius: 4px;
       white-space: nowrap;
@@ -493,7 +525,7 @@
     .mo-headline {
       font-size: clamp(17px, 2.5vw, 22px);
       font-weight: 800;
-      color: #c0392b;
+      color: var(--danger);
       line-height: 1.2;
       margin-bottom: 8px;
       text-transform: uppercase;
@@ -504,7 +536,7 @@
       font-weight: 700;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: #c0392b;
+      color: var(--danger);
       margin-bottom: 6px;
     }
     .mo-countdown {
@@ -541,7 +573,7 @@
     }
     .mo-btn {
       display: block;
-      background: #2d7a2e;
+      background: var(--green);
       color: #fff;
       text-decoration: none;
       text-align: center;
@@ -553,7 +585,7 @@
       cursor: pointer;
       margin-bottom: 10px;
     }
-    .mo-btn:hover { background: #245f25; }
+    .mo-btn:hover { background: var(--green-dk); }
     .mo-meta { font-size: 12px; color: #555; line-height: 2.1; }
     .mo-meta .risk-bar { display: inline-flex; gap: 3px; margin-left: 4px; vertical-align: middle; }
     .mo-meta .risk-dot { width: 10px; height: 10px; border-radius: 2px; }
@@ -637,26 +669,28 @@
       background: repeating-linear-gradient(-45deg,transparent,transparent 20px,rgba(255,255,255,.01) 20px,rgba(255,255,255,.01) 21px);
     }
     .final-banner > * { position: relative; }
-    .fb-badge { display: inline-block; background: var(--brown); color: #fff; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 4px 12px; margin-bottom: 14px; }
-    .fb-logo  { width: 110px; height: 30px; border: 1px dashed rgba(200,190,171,.3); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; letter-spacing: .08em; color: rgba(200,190,171,.5); text-transform: uppercase; }
-    .fb-title { font-family: var(--serif); font-size: clamp(20px, 3.5vw, 30px); font-weight: 800; margin-bottom: 4px; line-height: 1.1; }
+    .fb-badge { display: inline-block; background: var(--danger); color: var(--badge-text); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 4px 12px; margin-bottom: 14px; border-radius: 3px; }
+    .fb-logo  { margin: 0 auto 12px; }
+    .fb-logo img { height: 36px; width: auto; filter: brightness(0) invert(1); opacity: .9; }
+    .fb-title { font-family: var(--font); font-size: clamp(20px, 3.5vw, 30px); font-weight: 800; margin-bottom: 4px; line-height: 1.1; }
     .fb-sub   { font-size: 10px; font-weight: 600; color: var(--brown-lt); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 20px; }
-    .fb-pct   { font-family: var(--serif); font-size: clamp(56px, 10vw, 80px); font-weight: 800; line-height: .9; margin-bottom: 5px; }
+    .fb-pct   { font-family: var(--font); font-size: clamp(56px, 10vw, 80px); font-weight: 800; line-height: .9; margin-bottom: 5px; }
     .fb-pct-l { font-size: 12px; color: var(--brown-lt); letter-spacing: .07em; margin-bottom: 22px; }
     .fb-btn {
       display: inline-block;
-      background: #fff;
-      color: #111;
+      background: var(--green);
+      color: #fff;
       text-decoration: none;
       padding: 15px 44px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: .08em;
+      letter-spacing: .06em;
       text-transform: uppercase;
+      border-radius: 6px;
       transition: background .2s;
       cursor: pointer;
     }
-    .fb-btn:hover { background: #f5f0e8; }
+    .fb-btn:hover { background: var(--green-dk); }
     .fb-trust { margin-top: 14px; font-size: 11px; color: var(--brown-lt); line-height: 2.2; }
     .fb-trust span { margin: 0 8px; }
 
@@ -664,7 +698,7 @@
        SIDEBAR
        ───────────────────────────────────────────── */
     .sidebar { padding-top: 22px; }
-    .sb-sticky { position: sticky; top: 18px; }
+    .sb-sticky { position: sticky; top: calc(var(--ann-h) + 14px); }
 
     .sb-widget {
       background: #fff;
@@ -689,7 +723,7 @@
       color: #111;
       line-height: 1.3;
     }
-    .sb-save-line span { color: #c0392b; }
+    .sb-save-line span { color: var(--danger); }
     .sb-img-wrap {
       position: relative;
       width: 100%;
@@ -704,8 +738,8 @@
       top: 10px; right: 10px;
       width: 46px; height: 46px;
       border-radius: 50%;
-      background: #c0392b;
-      color: #fff;
+      background: var(--danger);
+      color: var(--badge-text);
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       font-size: 12px; font-weight: 800; line-height: 1.1;
@@ -714,7 +748,7 @@
     .sb-off-badge small { font-size: 8px; font-weight: 600; }
     .sb-cta-btn {
       display: block;
-      background: #2d7a2e;
+      background: var(--green);
       color: #fff;
       text-decoration: none;
       text-align: center;
@@ -728,7 +762,7 @@
       border-radius: 4px;
       cursor: pointer;
     }
-    .sb-cta-btn:hover { background: #245f25; }
+    .sb-cta-btn:hover { background: var(--green-dk); }
     /* Reviews section */
     .sb-reviews-hdr {
       text-align: center;
@@ -836,6 +870,20 @@
   </style>
 </head>
 <body>
+
+<!-- ═══════════════════════════════════════════════
+     STICKY ANNOUNCEMENT BAR — TAIMA brandbook
+     ═══════════════════════════════════════════════ -->
+<div class="ann-bar">
+  <span>Spring Detox Sale &nbsp;·&nbsp; <strong>TAIMA® Titanium Pan — 50% Off Today Only</strong> &nbsp;·&nbsp; Free Worldwide Shipping</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     LOGO HEADER
+     ═══════════════════════════════════════════════ -->
+<header style="background:#fff;border-bottom:1px solid #f0ece6;text-align:center;padding:14px 20px;">
+  <img src="./logo.png" alt="TAIMA® Titanium" style="height:44px;width:auto;display:inline-block;" onerror="this.style.cssText='height:44px;font-size:22px;font-weight:800;letter-spacing:.06em;color:#121212;'">
+</header>
 
 <!-- ═══════════════════════════════════════════════
      URGENCY BANNER
@@ -1238,7 +1286,7 @@
     <!-- FINAL OFFER BANNER -->
     <div class="final-banner" id="offer">
       <span class="fb-badge">Special Offer for Our Readers</span>
-      <div class="fb-logo">TAIMA® Logo</div>
+      <div class="fb-logo"><img src="./logo.png" alt="TAIMA®" onerror="this.parentElement.innerHTML='<span style=\'font-size:20px;font-weight:800;letter-spacing:.1em;color:#fff;\'>TAIMA®</span>'"></div>
       <div class="fb-title">TAIMA® Titanium Pan</div>
       <div class="fb-sub">Limited Time &nbsp;·&nbsp; Only On This Page</div>
       <div class="fb-pct">50% OFF</div>
