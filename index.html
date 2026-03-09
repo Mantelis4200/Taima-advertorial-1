@@ -9,9 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
-    /* =============================================
-       CSS CUSTOM PROPERTIES — TAIMA Brand System
-       ============================================= */
+    /* ═══════════════════════════════════════════
+       DESIGN TOKENS — TAIMA Brand System
+       ═══════════════════════════════════════════ */
     :root {
       --bg:            #FAFAF7;
       --bg-warm:       #F5F0E8;
@@ -29,22 +29,20 @@
       --danger-bg:     #FDF2F1;
       --success:       #2D7D46;
       --gold:          #C8A228;
-      --gold-light:    #F5E8B0;
-
-      --font-display:  'Playfair Display', Georgia, serif;
-      --font-body:     'Poppins', -apple-system, sans-serif;
-      --max-w:         720px;
       --top-bar-h:     44px;
       --bot-bar-h:     68px;
+      --sidebar-w:     290px;
+      --sidebar-gap:   28px;
+      --article-max:   700px;
+      --font-display:  'Playfair Display', Georgia, serif;
+      --font-body:     'Poppins', -apple-system, sans-serif;
     }
 
-    /* =============================================
+    /* ═══════════════════════════════════════════
        RESET & BASE
-       ============================================= */
+       ═══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: var(--font-body);
       background: var(--bg);
@@ -55,126 +53,109 @@
       padding-bottom: var(--bot-bar-h);
     }
 
-    /* =============================================
-       FIXED UPDATE BANNER (top)
-       ============================================= */
-    .update-banner {
+    /* ═══════════════════════════════════════════
+       FIXED TOP ANNOUNCEMENT BAR
+       ═══════════════════════════════════════════ */
+    .announce-bar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 200;
+      top: 0; left: 0; right: 0;
+      z-index: 300;
       background: var(--brown);
       color: white;
-      text-align: center;
-      padding: 0 20px;
       height: var(--top-bar-h);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      font-family: var(--font-body);
+      gap: 10px;
+      padding: 0 20px;
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
+      text-align: center;
     }
-    .update-banner a {
-      color: white;
-      text-decoration: underline;
-      font-weight: 700;
-    }
-    .update-banner .pulse {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
+    .announce-bar .dot {
+      width: 7px; height: 7px;
       background: #ffde7a;
       border-radius: 50%;
-      animation: pulse 1.6s ease-in-out infinite;
       flex-shrink: 0;
+      animation: blink 1.8s ease-in-out infinite;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.7); }
-    }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+    .announce-bar a { color: #ffde7a; font-weight: 700; text-decoration: underline; }
 
-    /* =============================================
-       FIXED STICKY CTA BAR (bottom)
-       ============================================= */
-    .sticky-cta-bar {
+    /* ═══════════════════════════════════════════
+       FIXED BOTTOM CTA BAR  (mobile primary CTA)
+       ═══════════════════════════════════════════ */
+    .bot-cta-bar {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 200;
+      bottom: 0; left: 0; right: 0;
+      z-index: 300;
       background: #1A1A1A;
-      color: white;
+      height: var(--bot-bar-h);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 24px;
+      padding: 0 20px;
       gap: 12px;
-      height: var(--bot-bar-h);
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+      box-shadow: 0 -3px 16px rgba(0,0,0,.3);
     }
-    .sticky-cta-bar .cta-text {
+    .bot-cta-bar .label {
+      color: white;
       font-size: 13px;
       font-weight: 500;
-      line-height: 1.4;
+      line-height: 1.35;
       flex: 1;
     }
-    .sticky-cta-bar .cta-text strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .sticky-cta-bar a.btn-sticky {
+    .bot-cta-bar .label strong { display: block; font-size: 14px; font-weight: 700; }
+    .bot-cta-bar a {
       background: var(--brown);
       color: white;
       text-decoration: none;
-      padding: 10px 22px;
-      font-family: var(--font-body);
+      padding: 10px 20px;
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.07em;
+      letter-spacing: .07em;
       text-transform: uppercase;
       white-space: nowrap;
-      display: inline-block;
-      transition: background 0.2s;
       flex-shrink: 0;
+      transition: background .2s;
     }
-    .sticky-cta-bar a.btn-sticky:hover { background: var(--brown-dark); }
+    .bot-cta-bar a:hover { background: var(--brown-dark); }
 
-    /* =============================================
-       LAYOUT CONTAINER
-       ============================================= */
-    .container {
-      max-width: var(--max-w);
+    /* ═══════════════════════════════════════════
+       OUTER PAGE WRAPPER — 2-column on desktop
+       ═══════════════════════════════════════════ */
+    .page-outer {
+      max-width: calc(var(--article-max) + var(--sidebar-w) + var(--sidebar-gap) + 40px);
       margin: 0 auto;
       padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr var(--sidebar-w);
+      gap: var(--sidebar-gap);
+      align-items: start;
     }
 
-    /* =============================================
-       PUBLICATION HEADER
-       ============================================= */
+    /* ═══════════════════════════════════════════
+       PUBLICATION HEADER  (spans full width)
+       ═══════════════════════════════════════════ */
     .pub-header {
+      grid-column: 1 / -1;
       padding: 28px 0 16px;
       border-bottom: 3px solid var(--text);
-      margin-bottom: 0;
     }
     .pub-name {
       font-family: var(--font-display);
-      font-size: clamp(24px, 5vw, 36px);
+      font-size: clamp(22px, 4vw, 34px);
       font-weight: 800;
-      letter-spacing: -0.02em;
+      letter-spacing: -.02em;
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .pub-tagline {
       text-align: center;
-      font-size: 11px;
-      font-weight: 400;
+      font-size: 10.5px;
       color: var(--text-muted);
-      letter-spacing: 0.15em;
+      letter-spacing: .15em;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
@@ -184,82 +165,73 @@
       align-items: center;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 6px 0;
+      padding: 5px 0;
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
 
-    /* =============================================
-       ARTICLE
-       ============================================= */
-    article {
-      padding: 32px 0 0;
-    }
+    /* ═══════════════════════════════════════════
+       ARTICLE COLUMN
+       ═══════════════════════════════════════════ */
+    .article-col { min-width: 0; padding-top: 28px; padding-bottom: 48px; }
 
-    /* DISCLAIMER */
-    .disclaimer-box {
+    /* Disclaimer */
+    .disclaimer {
       background: var(--bg-warm);
       border: 1px solid var(--border);
       border-left: 3px solid var(--brown-light);
-      padding: 12px 16px;
+      padding: 11px 15px;
       font-size: 11.5px;
       color: var(--text-muted);
-      margin-bottom: 28px;
-      line-height: 1.65;
       font-style: italic;
+      margin-bottom: 26px;
+      line-height: 1.6;
     }
 
-    /* HERO HEADLINE */
-    h1.article-headline {
+    /* Hero headline */
+    h1.headline {
       font-family: var(--font-display);
-      font-size: clamp(28px, 6vw, 46px);
+      font-size: clamp(26px, 5vw, 44px);
       font-weight: 800;
       line-height: 1.12;
-      letter-spacing: -0.025em;
-      margin-bottom: 24px;
-      color: var(--text);
+      letter-spacing: -.025em;
+      margin-bottom: 22px;
     }
 
-    /* WARNING BOX */
-    .warning-box {
+    /* Warning box */
+    .warn-box {
       background: var(--danger-bg);
       border: 1.5px solid #e8b4b0;
       border-left: 4px solid var(--danger);
-      padding: 18px 22px;
-      margin-bottom: 32px;
-      border-radius: 0;
+      padding: 16px 20px;
+      margin-bottom: 28px;
     }
-    .warning-box .warn-label {
+    .warn-box .tag {
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--danger);
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
-    .warning-box p {
-      font-size: 15.5px;
-      line-height: 1.7;
-      color: var(--text);
-    }
+    .warn-box p { font-size: 15px; line-height: 1.7; }
 
-    /* AUTHOR BYLINE */
-    .author-byline {
+    /* Author byline */
+    .byline {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 18px 0;
+      gap: 14px;
+      padding: 16px 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
-    .author-avatar {
-      width: 60px;
-      height: 60px;
+    .byline-avatar {
+      width: 58px; height: 58px;
       border-radius: 50%;
       background: var(--bg-cream);
       border: 2px solid var(--brown-light);
@@ -272,75 +244,58 @@
       font-weight: 600;
       color: var(--brown);
       text-align: center;
-      letter-spacing: 0.04em;
       text-transform: uppercase;
-      overflow: hidden;
-      line-height: 1.3;
+      letter-spacing: .04em;
       gap: 2px;
+      overflow: hidden;
     }
-    .author-avatar .cam-icon { font-size: 18px; opacity: 0.45; }
-    .author-info .name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-    .author-info .title {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-    .author-info .date {
-      font-size: 11px;
-      color: var(--text-light);
-      margin-top: 4px;
-    }
+    .byline-avatar span:first-child { font-size: 18px; opacity: .4; }
+    .byline-info .name  { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .byline-info .title { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    .byline-info .date  { font-size: 11px; color: var(--text-light); margin-top: 3px; }
 
-    /* RATINGS BAR */
+    /* Ratings bar */
     .ratings-bar {
       display: flex;
       align-items: center;
       gap: 10px;
       background: var(--bg-warm);
       border: 1px solid var(--border);
-      padding: 10px 16px;
-      margin-bottom: 36px;
+      padding: 10px 14px;
+      margin-bottom: 32px;
     }
-    .stars { color: var(--gold); font-size: 18px; letter-spacing: 2px; line-height: 1; }
-    .ratings-count { font-weight: 700; font-size: 13px; }
-    .ratings-label { font-size: 12px; color: var(--text-muted); }
+    .stars { color: var(--gold); font-size: 17px; letter-spacing: 2px; }
+    .r-count { font-weight: 700; font-size: 13px; }
+    .r-label { font-size: 12px; color: var(--text-muted); }
 
-    /* BODY TEXT */
-    .body-text p {
-      font-size: 17px;
-      line-height: 1.82;
-      margin-bottom: 18px;
-      color: var(--text);
-    }
-    .body-text p:last-child { margin-bottom: 0; }
-    .body-text p strong { font-weight: 700; }
+    /* Body text */
+    .prose p  { font-size: 17px; line-height: 1.82; margin-bottom: 18px; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { font-weight: 700; }
 
-    /* SECTION HEADINGS */
-    h2.section-head {
+    /* Section headings */
+    h2.sh {
       font-family: var(--font-display);
-      font-size: clamp(22px, 4vw, 34px);
+      font-size: clamp(20px, 3.5vw, 32px);
       font-weight: 700;
       line-height: 1.2;
-      letter-spacing: -0.015em;
-      margin: 52px 0 22px;
-      color: var(--text);
+      letter-spacing: -.015em;
+      margin: 48px 0 20px;
     }
-    h2.section-head::before {
+    h2.sh::before {
       content: '';
       display: block;
-      width: 40px;
-      height: 3px;
+      width: 36px; height: 3px;
       background: var(--brown);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
-    /* IMAGE PLACEHOLDER */
-    .img-placeholder {
+    /* Section divider */
+    .divider      { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    .divider-bold { border: none; border-top: 3px solid var(--text); margin: 48px 0 0; }
+
+    /* Image placeholder */
+    .img-ph {
       width: 100%;
       background: var(--bg-cream);
       border: 2px dashed var(--brown-light);
@@ -348,310 +303,445 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      margin: 28px 0;
-      position: relative;
+      gap: 7px;
+      margin: 26px 0;
     }
-    .img-placeholder .ph-icon { font-size: 32px; opacity: 0.4; }
-    .img-placeholder .ph-label {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--brown);
-    }
-    .img-placeholder .ph-desc {
-      font-size: 11px;
-      color: var(--brown-dark);
-      font-weight: 400;
-      text-transform: none;
-      letter-spacing: 0;
-      text-align: center;
-      padding: 0 16px;
-    }
-    .img-placeholder.h-author  { height: 72px; border-radius: 50%; width: 72px; margin: 0; flex-shrink: 0; }
-    .img-placeholder.h-hero    { height: 400px; }
-    .img-placeholder.h-medium  { height: 300px; }
-    .img-placeholder.h-small   { height: 220px; }
-    .img-placeholder.h-product { height: 360px; }
-    .img-placeholder.h-invest  { height: 260px; }
+    .img-ph .ico  { font-size: 28px; opacity: .38; }
+    .img-ph .lbl  { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brown); }
+    .img-ph .desc { font-size: 11px; color: var(--brown-dark); text-align: center; padding: 0 14px; }
+    .img-ph.h320  { height: 320px; }
+    .img-ph.h280  { height: 280px; }
+    .img-ph.h240  { height: 240px; }
+    .img-ph.h360  { height: 360px; }
+    .img-ph.h220  { height: 220px; }
+    .img-ph.h260  { height: 260px; }
 
-    /* ICON LIST */
-    .icon-list {
-      list-style: none;
-      margin: 18px 0 28px;
-      border: 1px solid var(--border);
-    }
+    /* Icon list */
+    .icon-list { list-style: none; margin: 16px 0 24px; border: 1px solid var(--border); }
     .icon-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 16px;
-      line-height: 1.7;
-      padding: 14px 18px;
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 16px; line-height: 1.7;
+      padding: 13px 16px;
       border-bottom: 1px solid var(--border-soft);
     }
     .icon-list li:last-child { border-bottom: none; }
-    .icon-list li .ico { flex-shrink: 0; font-size: 17px; margin-top: 2px; }
+    .icon-list li .i { flex-shrink: 0; font-size: 16px; margin-top: 2px; }
 
-    /* HIGHLIGHT BOX */
-    .highlight-box {
+    /* Highlight / pullquote */
+    .pullquote {
       background: var(--bg-warm);
       border-left: 4px solid var(--brown);
-      padding: 22px 28px;
-      margin: 28px 0;
+      padding: 20px 24px;
+      margin: 26px 0;
     }
-    .highlight-box p {
-      font-size: 17px;
-      line-height: 1.75;
-      margin-bottom: 12px;
-    }
-    .highlight-box p:last-child { margin-bottom: 0; }
-    .highlight-box p strong { font-weight: 700; }
+    .pullquote p { font-size: 17px; line-height: 1.75; margin-bottom: 10px; }
+    .pullquote p:last-child { margin-bottom: 0; }
 
-    /* PRODUCT FEATURE GRID */
-    .feature-grid { margin: 28px 0; }
-    .feature-item {
-      padding: 22px 0;
-      border-top: 1px solid var(--border);
+    /* ───────────────────────────────────────────
+       INLINE OFFER BANNERS (mid-article)
+       ─────────────────────────────────────────── */
+
+    /* UPDATE / alert banner */
+    .alert-banner {
+      background: #1A1A1A;
+      color: white;
+      padding: 16px 20px;
+      margin: 32px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
     }
-    .feature-item:last-child { border-bottom: 1px solid var(--border); }
-    .feature-num {
-      display: inline-block;
+    .alert-banner .ab-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .alert-banner .ab-body { flex: 1; }
+    .alert-banner .ab-tag {
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      color: white;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .alert-banner .ab-text { font-size: 14px; line-height: 1.6; font-weight: 500; }
+    .alert-banner .ab-cta {
+      display: inline-block;
+      margin-top: 10px;
       background: var(--brown);
-      padding: 2px 8px;
-      margin-bottom: 8px;
-    }
-    .feature-title {
-      font-size: 16px;
+      color: white;
+      text-decoration: none;
+      padding: 8px 18px;
+      font-size: 12px;
       font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--text);
+      letter-spacing: .07em;
+      text-transform: uppercase;
     }
-    .feature-desc {
-      font-size: 15px;
-      line-height: 1.75;
+    .alert-banner .ab-cta:hover { background: var(--brown-dark); }
+
+    /* Mid-article discount box */
+    .mid-offer {
+      border: 2px solid var(--brown);
+      background: var(--bg-warm);
+      padding: 24px 24px 20px;
+      margin: 36px 0;
+      text-align: center;
+    }
+    .mid-offer .mo-badge {
+      display: inline-block;
+      background: var(--brown);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      margin-bottom: 14px;
+    }
+    .mid-offer .mo-title {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.15;
+    }
+    .mid-offer .mo-sub {
+      font-size: 13px;
       color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .mid-offer .mo-pct {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--brown-dark);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .mid-offer a.mo-btn {
+      display: inline-block;
+      background: #1A1A1A;
+      color: white;
+      text-decoration: none;
+      padding: 14px 36px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: background .2s;
+    }
+    .mid-offer a.mo-btn:hover { background: var(--brown-dark); }
+    .mid-offer .mo-trust {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      line-height: 1.8;
     }
 
-    /* TESTIMONIALS */
-    .testimonials-header {
-      font-family: var(--font-display);
-      font-size: clamp(22px, 4vw, 30px);
+    /* Product features */
+    .feature-grid { margin: 24px 0; }
+    .feature-item { padding: 20px 0; border-top: 1px solid var(--border); }
+    .feature-item:last-child { border-bottom: 1px solid var(--border); }
+    .fi-num {
+      display: inline-block;
+      background: var(--brown);
+      color: white;
+      font-size: 10px;
       font-weight: 700;
-      text-align: center;
-      margin: 52px 0 28px;
+      letter-spacing: .1em;
+      padding: 2px 8px;
+      margin-bottom: 7px;
     }
-    .testimonials-header span {
+    .fi-title { font-size: 15.5px; font-weight: 700; margin-bottom: 5px; }
+    .fi-desc  { font-size: 14.5px; line-height: 1.75; color: var(--text-muted); }
+
+    /* Testimonials */
+    .test-header {
+      text-align: center;
+      margin: 48px 0 24px;
+    }
+    .test-header .sup {
       display: block;
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .15em;
       text-transform: uppercase;
       color: var(--brown);
       margin-bottom: 8px;
     }
-    .testimonial-card {
+    .test-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3.5vw, 28px);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .tcard {
       background: white;
       border: 1px solid var(--border);
       border-top: 3px solid var(--brown);
-      padding: 22px 24px;
-      margin-bottom: 14px;
+      padding: 20px 22px;
+      margin-bottom: 12px;
     }
-    .testimonial-stars { color: var(--gold); font-size: 15px; margin-bottom: 10px; letter-spacing: 2px; }
-    .testimonial-text {
-      font-size: 15.5px;
-      line-height: 1.75;
-      color: var(--text);
-      margin-bottom: 14px;
-      font-style: italic;
-    }
-    .testimonial-author {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
+    .tcard .ts { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 8px; }
+    .tcard .tt { font-size: 15px; line-height: 1.75; font-style: italic; margin-bottom: 12px; }
+    .tcard .ta { font-size: 12px; font-weight: 700; color: var(--text-muted); }
 
-    /* CHECKLIST */
-    .checklist {
-      list-style: none;
-      margin: 18px 0 28px;
-    }
+    /* Checklist */
+    .checklist { list-style: none; margin: 16px 0 24px; }
     .checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 16px;
-      line-height: 1.7;
-      padding: 12px 0;
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 16px; line-height: 1.7;
+      padding: 11px 0;
       border-bottom: 1px solid var(--border-soft);
     }
     .checklist li:last-child { border-bottom: none; }
-    .check-ico {
-      color: var(--success);
-      font-size: 16px;
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 3px;
-    }
+    .ck { color: var(--success); font-weight: 700; flex-shrink: 0; margin-top: 3px; }
 
-    /* CTA SECTION */
-    .cta-section {
-      margin: 40px 0;
-      text-align: center;
-    }
-    a.btn-cta {
-      display: inline-block;
-      background: var(--text);
+    /* Final offer banner */
+    .final-offer {
+      background: #1A1A1A;
       color: white;
-      text-decoration: none;
-      padding: 18px 44px;
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      transition: background 0.2s;
-    }
-    a.btn-cta:hover { background: var(--brown-dark); }
-    a.btn-cta.large { padding: 22px 56px; font-size: 17px; }
-    .cta-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 10px;
-      line-height: 1.6;
-    }
-    .cta-sub strong { color: var(--brown); }
-
-    /* SECTION DIVIDER */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 48px 0;
-    }
-    .divider-strong {
-      border: none;
-      border-top: 3px solid var(--text);
-      margin: 52px 0 0;
-    }
-
-    /* OFFER BANNER */
-    .offer-banner {
-      background: var(--text);
-      color: white;
-      padding: 44px 32px;
-      margin: 48px 0;
+      padding: 44px 28px;
+      margin: 44px 0;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .offer-banner::before {
+    .final-offer::before {
       content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 24px,
-        rgba(255,255,255,0.015) 24px,
-        rgba(255,255,255,0.015) 25px
-      );
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(255,255,255,.012) 22px, rgba(255,255,255,.012) 23px);
     }
-    .offer-banner > * { position: relative; }
-    .offer-badge {
+    .final-offer > * { position: relative; }
+    .fo-badge {
       display: inline-block;
       background: var(--brown);
       color: white;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      padding: 5px 14px;
-      margin-bottom: 18px;
+      padding: 4px 14px;
+      margin-bottom: 16px;
     }
-    .offer-logo-placeholder {
+    .fo-logo {
+      width: 120px; height: 34px;
+      border: 1.5px dashed rgba(200,190,171,.45);
+      margin: 0 auto 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 120px;
-      height: 36px;
-      border: 1.5px dashed rgba(200,190,171,0.5);
-      margin: 0 auto 18px;
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: .08em;
       color: var(--brown-light);
       text-transform: uppercase;
     }
-    .offer-title {
+    .fo-title {
       font-family: var(--font-display);
-      font-size: clamp(24px, 4vw, 36px);
+      font-size: clamp(22px, 4vw, 34px);
       font-weight: 800;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       line-height: 1.1;
     }
-    .offer-subtitle {
+    .fo-sub {
       font-size: 11px;
       font-weight: 600;
       color: var(--brown-light);
-      letter-spacing: 0.15em;
+      letter-spacing: .15em;
       text-transform: uppercase;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
-    .offer-pct {
+    .fo-pct {
       font-family: var(--font-display);
-      font-size: clamp(64px, 14vw, 96px);
+      font-size: clamp(60px, 12vw, 88px);
       font-weight: 800;
-      line-height: 0.9;
-      color: white;
+      line-height: .9;
       margin-bottom: 6px;
     }
-    .offer-pct-label {
-      font-size: 13px;
-      color: var(--brown-light);
-      letter-spacing: 0.08em;
-      margin-bottom: 28px;
-    }
-    a.btn-offer {
+    .fo-pct-lbl { font-size: 13px; color: var(--brown-light); letter-spacing: .08em; margin-bottom: 26px; }
+    .fo-btn {
       display: inline-block;
       background: white;
-      color: var(--text);
+      color: #1A1A1A;
       text-decoration: none;
-      padding: 18px 52px;
-      font-family: var(--font-body);
-      font-size: 14px;
+      padding: 16px 48px;
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      transition: background 0.2s, color 0.2s;
+      transition: background .2s;
     }
-    a.btn-offer:hover { background: var(--bg-cream); }
-    .offer-guarantees {
-      margin-top: 18px;
-      font-size: 12px;
+    .fo-btn:hover { background: var(--bg-cream); }
+    .fo-trust {
+      margin-top: 16px;
+      font-size: 11px;
       color: var(--brown-light);
-      line-height: 2;
+      line-height: 2.2;
     }
-    .offer-guarantees span { margin: 0 10px; }
+    .fo-trust span { margin: 0 8px; }
 
-    /* FOOTER */
+    /* ═══════════════════════════════════════════
+       SIDEBAR COLUMN
+       ═══════════════════════════════════════════ */
+    .sidebar-col {
+      padding-top: 28px;
+    }
+    .sidebar-sticky {
+      position: sticky;
+      top: calc(var(--top-bar-h) + 16px);
+    }
+
+    /* Sidebar offer widget */
+    .sb-widget {
+      background: white;
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--brown);
+      overflow: hidden;
+    }
+    .sb-badge {
+      background: var(--brown);
+      color: white;
+      text-align: center;
+      padding: 7px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .sb-img {
+      width: 100%;
+      height: 220px;
+      background: var(--bg-cream);
+      border-bottom: 1px dashed var(--brown-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--brown);
+    }
+    .sb-img span:first-child { font-size: 24px; opacity: .35; }
+    .sb-body { padding: 18px 16px 20px; }
+    .sb-logo {
+      width: 100px; height: 28px;
+      border: 1px dashed var(--brown-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin: 0 auto 14px;
+    }
+    .sb-pct {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--brown-dark);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .sb-pct-lbl {
+      text-align: center;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .sb-page-lbl {
+      text-align: center;
+      font-size: 11px;
+      color: var(--brown);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .sb-stars {
+      text-align: center;
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+    .sb-rating-lbl {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .sb-btn {
+      display: block;
+      background: #1A1A1A;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      padding: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      transition: background .2s;
+      margin-bottom: 12px;
+    }
+    .sb-btn:hover { background: var(--brown-dark); }
+    .sb-trust {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 2;
+      text-align: center;
+      border-top: 1px solid var(--border-soft);
+      padding-top: 12px;
+    }
+    .sb-trust div { display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+    /* Sidebar secondary info box */
+    .sb-info {
+      background: var(--bg-warm);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-top: 14px;
+    }
+    .sb-info-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--brown-dark);
+      margin-bottom: 10px;
+    }
+    .sb-info ul {
+      list-style: none;
+      font-size: 12px;
+      line-height: 1.9;
+      color: var(--text-muted);
+    }
+    .sb-info ul li::before { content: '✓ '; font-weight: 700; color: var(--success); }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ */
     footer {
       background: var(--bg-cream);
       border-top: 3px solid var(--text);
-      padding: 32px 20px 40px;
-      margin-top: 0;
+      padding: 30px 20px 38px;
+    }
+    .footer-inner {
+      max-width: calc(var(--article-max) + var(--sidebar-w) + var(--sidebar-gap) + 40px);
+      margin: 0 auto;
     }
     .footer-links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 8px 20px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .footer-links a {
       font-size: 11.5px;
@@ -660,76 +750,68 @@
       font-weight: 500;
     }
     .footer-links a:hover { color: var(--text); text-decoration: underline; }
-    .footer-disclaimer {
-      max-width: var(--max-w);
-      margin: 0 auto 16px;
+    .footer-disc {
       font-size: 11px;
       line-height: 1.75;
       color: var(--text-light);
       text-align: center;
+      margin-bottom: 14px;
     }
-    .footer-disclaimer p { margin-bottom: 10px; }
-    .footer-disclaimer p:last-child { margin-bottom: 0; }
-    .footer-copyright {
+    .footer-disc p { margin-bottom: 8px; }
+    .footer-copy {
       text-align: center;
       font-size: 11px;
       color: var(--text-light);
       border-top: 1px solid var(--border);
-      padding-top: 16px;
-      margin-top: 16px;
+      padding-top: 14px;
+      margin-top: 14px;
     }
 
-    /* =============================================
+    /* ═══════════════════════════════════════════
        RESPONSIVE
-       ============================================= */
-    @media (max-width: 600px) {
-      .sticky-cta-bar {
-        flex-direction: column;
-        height: auto;
-        padding: 10px 16px;
-        gap: 8px;
-        text-align: center;
-      }
+       ═══════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .page-outer { grid-template-columns: 1fr; }
+      .sidebar-col { display: none; } /* sidebar hidden on mobile – bot bar takes over */
+      .pub-meta-bar { flex-direction: column; gap: 3px; text-align: center; }
+    }
+    @media (max-width: 520px) {
+      .bot-cta-bar { flex-direction: column; height: auto; padding: 10px 14px; gap: 7px; text-align: center; }
       body { --bot-bar-h: 90px; }
-      .pub-meta-bar {
-        flex-direction: column;
-        gap: 3px;
-        text-align: center;
-      }
-      .offer-banner { padding: 32px 18px; }
-      .testimonial-card { padding: 18px; }
+      .final-offer { padding: 30px 16px; }
     }
   </style>
 </head>
 <body>
 
   <!-- ═══════════════════════════════════════════
-       FIXED UPDATE BANNER
+       TOP ANNOUNCEMENT BAR
        ═══════════════════════════════════════════ -->
-  <div class="update-banner">
-    <span class="pulse"></span>
-    <span>UPDATE: TAIMA® Titanium Pan is SELLING OUT faster than expected!
-      Lock in your order NOW to get 50% OFF + FAST SHIPPING worldwide!</span>
+  <div class="announce-bar">
+    <span class="dot"></span>
+    <span>UPDATE: TAIMA® Titanium Pan is SELLING OUT faster than expected! Lock in your order NOW — <a href="#offer">50% OFF + FAST SHIPPING</a> worldwide!</span>
   </div>
 
   <!-- ═══════════════════════════════════════════
-       FIXED BOTTOM CTA BAR
+       BOTTOM CTA BAR (mobile)
        ═══════════════════════════════════════════ -->
-  <div class="sticky-cta-bar">
-    <div class="cta-text">
-      <strong>🔥 Limited Offer: 50% Off TAIMA® Titanium Pan</strong>
+  <div class="bot-cta-bar">
+    <div class="label">
+      <strong>🔥 50% Off TAIMA® Titanium Pan</strong>
       Zero coatings. Zero chemicals. Zero compromise.
     </div>
-    <a href="#offer" class="btn-sticky">Claim Discount →</a>
+    <a href="#offer">Claim Discount →</a>
   </div>
 
   <!-- ═══════════════════════════════════════════
-       PUBLICATION HEADER
+       PAGE GRID STARTS
        ═══════════════════════════════════════════ -->
-  <div class="container">
+  <div class="page-outer">
+
+    <!-- FULL-WIDTH PUB HEADER -->
     <header class="pub-header">
       <div class="pub-name">Kitchen Health Journal</div>
-      <div class="pub-tagline">Independent reporting on food safety, nutrition & wellness</div>
+      <div class="pub-tagline">Independent reporting on food safety, nutrition &amp; wellness</div>
       <div class="pub-meta-bar">
         <span>Health &amp; Wellness</span>
         <span>Cookware Safety</span>
@@ -737,34 +819,32 @@
       </div>
     </header>
 
-    <!-- ═══════════════════════════════════════════
-         ARTICLE
-         ═══════════════════════════════════════════ -->
-    <article>
+    <!-- ═══════════════════════════════════════
+         ARTICLE COLUMN
+         ═══════════════════════════════════════ -->
+    <main class="article-col">
 
       <!-- Disclaimer -->
-      <div class="disclaimer-box">
+      <div class="disclaimer">
         This article is written for educational purposes only and is not intended as medical advice. If you have specific health concerns, consult a qualified medical professional.
       </div>
 
       <!-- Hero Headline -->
-      <h1 class="article-headline">
-        Scientists Are Calling It A Silent Public Health Crisis – And It's In Your Kitchen
-      </h1>
+      <h1 class="headline">Scientists Are Calling It A Silent Public Health Crisis – And It's In Your Kitchen</h1>
 
-      <!-- Warning Box -->
-      <div class="warning-box">
-        <span class="warn-label">⚠ Warning</span>
+      <!-- Warning -->
+      <div class="warn-box">
+        <span class="tag">⚠ Warning</span>
         <p>If you cook with non-stick pans daily – and you've never questioned what those coatings are actually made of – this may be the most important article you read this year…</p>
       </div>
 
       <!-- Author Byline -->
-      <div class="author-byline">
-        <div class="author-avatar">
-          <span class="cam-icon">📷</span>
+      <div class="byline">
+        <div class="byline-avatar">
+          <span>📷</span>
           <span>Photo 1</span>
         </div>
-        <div class="author-info">
+        <div class="byline-info">
           <div class="name">Dr. Elena Carter, MPH</div>
           <div class="title">Environmental Health Specialist and Research Advisor for Safer Home Cookware</div>
           <div class="date">March 5th, 2026</div>
@@ -773,13 +853,13 @@
 
       <!-- Ratings -->
       <div class="ratings-bar">
-        <span class="stars">★★★★</span><span style="color:var(--gold);font-size:16px;line-height:1;">½</span>
-        <span class="ratings-count">4,889 Ratings</span>
-        <span class="ratings-label">— Verified Reader Reviews</span>
+        <span class="stars">★★★★</span><span style="color:var(--gold);font-size:15px;line-height:1;">½</span>
+        <span class="r-count">4,889 Ratings</span>
+        <span class="r-label">— Verified Reader Reviews</span>
       </div>
 
-      <!-- ─── INTRO BODY ─── -->
-      <div class="body-text">
+      <!-- Intro -->
+      <div class="prose">
         <p>Non-stick pans are everywhere.</p>
         <p>They're light. They heat fast. They fry eggs in minutes, and the cleanup takes seconds.</p>
         <p>It's no surprise that nearly <strong>80% of American households rely on them daily.</strong></p>
@@ -789,28 +869,27 @@
       </div>
 
       <ul class="icon-list">
-        <li><span class="ico">⚠️</span> Thyroid disease</li>
-        <li><span class="ico">⚠️</span> Liver &amp; kidney dysfunction</li>
-        <li><span class="ico">⚠️</span> Infertility</li>
-        <li><span class="ico">⚠️</span> Autoimmune diseases</li>
-        <li><span class="ico">⚠️</span> Prostate cancer</li>
+        <li><span class="i">⚠️</span> Thyroid disease</li>
+        <li><span class="i">⚠️</span> Liver &amp; kidney dysfunction</li>
+        <li><span class="i">⚠️</span> Infertility</li>
+        <li><span class="i">⚠️</span> Autoimmune diseases</li>
+        <li><span class="i">⚠️</span> Prostate cancer</li>
       </ul>
 
-      <div class="body-text">
+      <div class="prose">
         <p>Millions of families cook with these chemicals every single day without knowing it. Here's how it happens.</p>
       </div>
 
-      <!-- ─── SECTION 1: MEET PFAS ─── -->
-      <h2 class="section-head">Meet PFAS: The Uninvited Chemical Guest At Every Meal</h2>
+      <!-- ─── SECTION 1 ─── -->
+      <h2 class="sh">Meet PFAS: The Uninvited Chemical Guest At Every Meal</h2>
 
-      <!-- Photo 2 -->
-      <div class="img-placeholder h-medium">
-        <span class="ph-icon">📷</span>
-        <span class="ph-label">Photo 2</span>
-        <span class="ph-desc">PFAS chemical diagram / close-up of non-stick coating breakdown</span>
+      <div class="img-ph h280">
+        <span class="ico">📷</span>
+        <span class="lbl">Photo 2</span>
+        <span class="desc">PFAS chemical diagram / close-up of non-stick coating breakdown</span>
       </div>
 
-      <div class="body-text">
+      <div class="prose">
         <p>PFAS are synthetic fluorinated chemicals used in traditional non-stick coatings because they resist heat, water, and grease exceptionally well.</p>
         <p>That's exactly what makes your eggs slide off the pan so effortlessly every morning.</p>
         <p>But here's where it gets concerning.</p>
@@ -818,251 +897,300 @@
         <p>Once the structure is compromised, small particles and chemical residue can begin to release.</p>
         <p><strong>And you don't need to see visible flakes peeling off to be exposed.</strong> The breakdown happens at a microscopic level: invisible, odorless, and completely undetectable.</p>
         <p>Trace amounts of PFAS end up in your food, kitchen dust, and even the air around your stove.</p>
-        <p>Which means you literally eat or breathe in the chemicals without even knowing it.</p>
-        <p>So do your spouse, your kids, and even your pets.</p>
-        <p>And once PFAS particles leave the coating and enter your kitchen environment, they behave exactly as they were designed to — they resist breakdown and stay in your kitchen for decades.</p>
-        <p>That long-term buildup is exactly what's raising serious alarm bells among scientists worldwide.</p>
+        <p>Which means you literally eat or breathe in the chemicals without even knowing it. So do your spouse, your kids, and even your pets.</p>
+        <p>And once PFAS particles leave the coating and enter your kitchen environment, they behave exactly as they were designed to — they resist breakdown and stay in your kitchen for <strong>decades.</strong></p>
       </div>
 
-      <!-- ─── SECTION 2: SILENT BUILD-UP ─── -->
-      <h2 class="section-head">The Silent Build-Up Happening Inside Your Body Makes Thousands Sick</h2>
+      <!-- ─── SECTION 2 ─── -->
+      <h2 class="sh">The Silent Build-Up Happening Inside Your Body Makes Thousands Sick</h2>
 
-      <!-- Photo 3 -->
-      <div class="img-placeholder h-medium">
-        <span class="ph-icon">📷</span>
-        <span class="ph-label">Photo 3</span>
-        <span class="ph-desc">PFAS accumulation in the body / infographic or medical visual</span>
+      <div class="img-ph h280">
+        <span class="ico">📷</span>
+        <span class="lbl">Photo 3</span>
+        <span class="desc">PFAS accumulation in the body / medical infographic</span>
       </div>
 
-      <div class="body-text">
+      <div class="prose">
         <p>These PFAS particles don't just pass through you. <strong>They accumulate.</strong></p>
-        <p>Over time, small exposures can add up.</p>
-        <p>Researchers have detected PFAS in <strong>1 out of 5 blood samples</strong> across the U.S. population, showing just how widespread exposure has become.</p>
+        <p>Over time, small exposures can add up. Researchers have detected PFAS in <strong>1 out of 5 blood samples</strong> across the U.S. population, showing just how widespread exposure has become.</p>
         <p>And once inside the body, PFAS can interfere with normal biological functions. They've been associated with hormonal imbalance, thyroid dysfunction, elevated cholesterol levels, and immune suppression.</p>
         <p>Certain PFAS compounds have been linked to fertility challenges and even fetal developmental risks during pregnancy.</p>
         <p>And perhaps most troubling, <strong>long-term exposure has been connected to kidney and testicular cancers.</strong></p>
         <p>So the real question arises: if the risks are known, why are these coatings still in millions of kitchens?</p>
       </div>
 
-      <!-- ─── SECTION 3: PROFIT VS HEALTH ─── -->
-      <h2 class="section-head">Profit vs. Health: The Hidden Truth Behind Coatings</h2>
-
-      <!-- Photo 4 -->
-      <div class="img-placeholder h-medium">
-        <span class="ph-icon">📷</span>
-        <span class="ph-label">Photo 4</span>
-        <span class="ph-desc">Industry / cookware market visual – worn out pans, replacement cycle</span>
+      <!-- ── MID-ARTICLE ALERT BANNER #1 ── -->
+      <div class="alert-banner">
+        <span class="ab-icon">🔥</span>
+        <div class="ab-body">
+          <span class="ab-tag">Limited Time Offer</span>
+          <div class="ab-text">TAIMA® Titanium Pan — <strong>50% OFF today only.</strong> The toxin-free pan trusted by thousands of health-conscious families. Lock in your order before stock runs out.</div>
+          <a href="#offer" class="ab-cta">Check Availability →</a>
+        </div>
       </div>
 
-      <div class="body-text">
+      <!-- ─── SECTION 3 ─── -->
+      <h2 class="sh">Profit vs. Health: The Hidden Truth Behind Coatings</h2>
+
+      <div class="img-ph h240">
+        <span class="ico">📷</span>
+        <span class="lbl">Photo 4</span>
+        <span class="desc">Industry visual – worn out pans, the replacement cycle</span>
+      </div>
+
+      <div class="prose">
         <p>Various investigations over the years have revealed something disturbing: major PFAS manufacturers were aware of potential health concerns decades ago.</p>
         <p>They knew these chemicals accumulated in the body. They saw early warning signs. Yet production continued. And expanded.</p>
         <p>Because once the coating wears down and the pan's performance drops, you buy a new one.</p>
         <p>That repeat purchase cycle fuels billions in revenue. The shorter the lifespan, the faster the profit.</p>
-        <p>Meanwhile, buyers think they're saving money with a $30 pan.</p>
-        <p><strong>What they don't see is how the lower upfront cost brings serious health risks.</strong></p>
+        <p>Meanwhile, buyers think they're saving money with a $30 pan. <strong>What they don't see is how the lower upfront cost brings serious health risks.</strong></p>
       </div>
 
-      <!-- ─── SECTION 4: HIDDEN TRADE-OFFS ─── -->
-      <h2 class="section-head">The Hidden Trade-Offs In Popular "Safe" Cookware</h2>
+      <!-- ─── SECTION 4 ─── -->
+      <h2 class="sh">The Hidden Trade-Offs In Popular "Safe" Cookware</h2>
 
-      <div class="body-text">
-        <p>In response to mounting evidence, several U.S. states have begun restricting PFAS in consumer products, including cookware.</p>
-        <p>And as restrictions tighten, manufacturers adapt. Now they offer next-generation PFAS-free pans, claiming they're "improved" and "safer." But in reality, they are not yet regulated or restricted, so the responsibility for protecting health quietly shifts onto the buyer.</p>
+      <div class="prose">
+        <p>In response to mounting evidence, several U.S. states have begun restricting PFAS in consumer products, including cookware. And as restrictions tighten, manufacturers adapt — offering "improved" and "safer" PFAS-free pans that are not yet regulated or restricted.</p>
+        <p>That's why so many people are walking away from non-stick and putting their trust in ceramic, cast iron, or stainless steel instead. Unfortunately, even these options are not safe enough:</p>
       </div>
 
-      <!-- Photo 5 -->
-      <div class="img-placeholder h-small">
-        <span class="ph-icon">📷</span>
-        <span class="ph-label">Photo 5</span>
-        <span class="ph-desc">Cookware comparison — ceramic, cast iron, stainless steel side by side</span>
-      </div>
-
-      <div class="body-text">
-        <p>That's why so many people are walking away from non-stick and putting their trust in ceramic, cast iron, or stainless steel instead.</p>
-        <p>They believe that as long as PFAS are not included, the pan is risk-free. Unfortunately, even these options are not safe enough:</p>
+      <div class="img-ph h220">
+        <span class="ico">📷</span>
+        <span class="lbl">Photo 5</span>
+        <span class="desc">Cookware comparison — ceramic, cast iron, stainless steel</span>
       </div>
 
       <ul class="icon-list">
-        <li><span class="ico">❌</span><span><strong>Ceramic-Coated Pans:</strong> lose their coating within 1–2 years, quickly exposing harmful heavy metals that can leach into food.</span></li>
-        <li><span class="ico">❌</span><span><strong>Stainless Steel Pans:</strong> many contain nickel &amp; chromium, causing allergic reactions &amp; hormone disruption.</span></li>
-        <li><span class="ico">❌</span><span><strong>Cast Iron Pans:</strong> high risk of rust and can leach excessive iron into food, leading to iron overload and organ damage in sensitive individuals.</span></li>
+        <li><span class="i">❌</span><span><strong>Ceramic-Coated Pans:</strong> lose their coating within 1–2 years, quickly exposing harmful heavy metals that can leach into food.</span></li>
+        <li><span class="i">❌</span><span><strong>Stainless Steel Pans:</strong> many contain nickel &amp; chromium, causing allergic reactions &amp; hormone disruption.</span></li>
+        <li><span class="i">❌</span><span><strong>Cast Iron Pans:</strong> high risk of rust and can leach excessive iron into food, leading to organ damage in sensitive individuals.</span></li>
       </ul>
 
       <!-- ─── SECTION 5: SOLUTION ─── -->
       <hr class="divider">
+      <h2 class="sh">Is There A Way To Cook Toxin-Free Meals?</h2>
 
-      <h2 class="section-head">Is There A Way To Cook Toxin-Free Meals?</h2>
-
-      <div class="body-text">
-        <p>As it turns out, there is.</p>
-        <p>And the answer has been hiding in plain sight — inside operating rooms, surgical tools, and medical implants used by doctors worldwide.</p>
+      <div class="prose">
+        <p>As it turns out, there is. And the answer has been hiding in plain sight — inside operating rooms, surgical tools, and medical implants used by doctors worldwide.</p>
         <p><strong>That material is titanium.</strong></p>
         <p>The human body doesn't reject, absorb, or react with it. That's why surgeons trust it inside the human body, and it's exactly why it belongs in your kitchen.</p>
-        <p>And that's just the beginning of what titanium can do:</p>
       </div>
 
       <ul class="icon-list">
-        <li><span class="ico">✅</span><span>Doesn't shed microplastics, heavy metals, or hormone-disrupting chemicals, even after years of daily use or high heat.</span></li>
-        <li><span class="ico">✅</span><span>Naturally non-reactive and non-corrosive — your food stays clean and untouched by metal residue, no matter what you cook.</span></li>
-        <li><span class="ico">✅</span><span>Resists bacterial growth on contact, keeping your cooking surface practically sterile without extra effort.</span></li>
-        <li><span class="ico">✅</span><span>Won't break down, peel, or flake over time, staying structurally intact meal after meal, year after year.</span></li>
-        <li><span class="ico">✅</span><span>Handles acidic foods — sauces, citrus, tomatoes — without reacting, leaching, or leaving any trace behind.</span></li>
+        <li><span class="i">✅</span><span>Doesn't shed microplastics, heavy metals, or hormone-disrupting chemicals, even after years of daily use or high heat.</span></li>
+        <li><span class="i">✅</span><span>Naturally non-reactive and non-corrosive — your food stays clean and untouched by metal residue.</span></li>
+        <li><span class="i">✅</span><span>Resists bacterial growth on contact, keeping your cooking surface practically sterile without extra effort.</span></li>
+        <li><span class="i">✅</span><span>Won't break down, peel, or flake over time — structurally intact meal after meal, year after year.</span></li>
+        <li><span class="i">✅</span><span>Handles acidic foods — sauces, citrus, tomatoes — without reacting, leaching, or leaving any trace behind.</span></li>
       </ul>
 
-      <div class="body-text">
+      <div class="prose">
         <p>But titanium as a material is only as good as the brand behind it. And when you look closely at what's available, one name rises above the rest.</p>
       </div>
 
-      <!-- ─── SECTION 6: TAIMA PRODUCT ─── -->
-      <hr class="divider-strong">
+      <!-- ─── SECTION 6: TAIMA ─── -->
+      <hr class="divider-bold">
+      <h2 class="sh">TAIMA® Changed the Cookware Industry</h2>
 
-      <h2 class="section-head">TAIMA® Changed the Cookware Industry</h2>
-
-      <!-- Photo 6 -->
-      <div class="img-placeholder h-product">
-        <span class="ph-icon">📷</span>
-        <span class="ph-label">Photo 6</span>
-        <span class="ph-desc">TAIMA® Certified Pure Titanium Classic Pan — main hero product shot</span>
+      <div class="img-ph h360">
+        <span class="ico">📷</span>
+        <span class="lbl">Photo 6</span>
+        <span class="desc">TAIMA® Certified Pure Titanium Classic Pan — main hero product shot</span>
       </div>
 
-      <div class="body-text">
+      <div class="prose">
         <p>TAIMA® didn't just enter the cookware market. <strong>It redefined what a pan could be.</strong></p>
-        <p>The brand was built on a single mission: to free every kitchen in the world from toxic cookware — forever.</p>
-        <p>No PFAS, coatings, or compromises. Just pure, clean cooking backed by Japanese premium quality and precision engineering.</p>
+        <p>The brand was built on a single mission: to free every kitchen in the world from toxic cookware — forever. No PFAS, coatings, or compromises. Just pure, clean cooking backed by Japanese premium quality and precision engineering.</p>
         <p>The result is the <strong>TAIMA® Certified Pure Titanium Classic Pan</strong> — and it's unlike anything else on the market.</p>
-        <p>Here's what sets it apart:</p>
       </div>
 
       <div class="feature-grid">
         <div class="feature-item">
-          <span class="feature-num">01</span>
-          <div class="feature-title">99.86% Grade 1 Pure Titanium</div>
-          <div class="feature-desc">This isn't titanium-coated or titanium-infused. It's certified pure — the same medical-grade standard used in surgical implants. That means zero toxic coatings, zero chemical risk, and zero compromise on safety.</div>
+          <span class="fi-num">01</span>
+          <div class="fi-title">99.86% Grade 1 Pure Titanium</div>
+          <div class="fi-desc">This isn't titanium-coated or titanium-infused. It's certified pure — the same medical-grade standard used in surgical implants. Zero toxic coatings, zero chemical risk, zero compromise on safety.</div>
         </div>
         <div class="feature-item">
-          <span class="feature-num">02</span>
-          <div class="feature-title">5-Ply Construction for Chef-Level Performance</div>
-          <div class="feature-desc">Five precision-engineered layers work together to distribute heat evenly across the entire surface. No hot spots. No uneven cooking. Just consistent, reliable results every single time.</div>
+          <span class="fi-num">02</span>
+          <div class="fi-title">5-Ply Construction for Chef-Level Performance</div>
+          <div class="fi-desc">Five precision-engineered layers distribute heat evenly across the entire surface. No hot spots. No uneven cooking. Consistent, reliable results every single time.</div>
         </div>
         <div class="feature-item">
-          <span class="feature-num">03</span>
-          <div class="feature-title">SlipScale™ Surface Pattern</div>
-          <div class="feature-desc">TAIMA®'s patented SlipScale™ surface is a naturally non-stick micro-pattern engineered directly into the titanium. No chemical coating needed. Food releases cleanly, cleanup takes seconds, and the surface stays intact for life.</div>
+          <span class="fi-num">03</span>
+          <div class="fi-title">SlipScale™ Surface Pattern</div>
+          <div class="fi-desc">TAIMA®'s patented SlipScale™ surface is a naturally non-stick micro-pattern engineered directly into the titanium. No chemical coating needed. Food releases cleanly, cleanup takes seconds, and the surface stays intact for life.</div>
         </div>
         <div class="feature-item">
-          <span class="feature-num">04</span>
-          <div class="feature-title">Handles Extreme Heat Without Degrading</div>
-          <div class="feature-desc">Where coated pans break down and warp under high heat, TAIMA® handles it effortlessly. Whether you're searing, sautéing, or finishing in the oven, the pan performs without releasing a single harmful chemical.</div>
+          <span class="fi-num">04</span>
+          <div class="fi-title">Handles Extreme Heat Without Degrading</div>
+          <div class="fi-desc">Where coated pans break down and warp under high heat, TAIMA® handles it effortlessly — searing, sautéing, or finishing in the oven — without releasing a single harmful chemical.</div>
         </div>
       </div>
 
-      <div class="highlight-box">
+      <div class="pullquote">
         <p><strong>TAIMA® isn't just a better pan. It's the last pan you'll ever need to buy.</strong></p>
       </div>
 
-      <!-- CTA #1 -->
-      <div class="cta-section">
-        <a href="#offer" class="btn-cta large">Get 50% Off TAIMA® Now</a>
-        <div class="cta-sub">
-          <strong>Limited-time offer</strong> &nbsp;·&nbsp; Lifetime warranty &nbsp;·&nbsp; 30-day risk-free return
-        </div>
+      <!-- ── MID-ARTICLE OFFER BOX ── -->
+      <div class="mid-offer" id="offer-mid">
+        <span class="mo-badge">Special Offer for Our Readers</span>
+        <div class="mo-title">TAIMA® Titanium Pan</div>
+        <div class="mo-sub">Limited Time · Only On This Page</div>
+        <div class="mo-pct">50% OFF</div>
+        <a href="#offer" class="mo-btn">Check Availability →</a>
+        <div class="mo-trust">✓ Lifetime Warranty &nbsp;&nbsp;✓ 30-Day Return Policy &nbsp;&nbsp;✓ Fast Worldwide Shipping</div>
       </div>
 
       <!-- ─── TESTIMONIALS ─── -->
-      <p class="testimonials-header">
-        <span>Trusted Worldwide</span>
-        Thousands of Households Are Already Cooking Toxin-Free
-      </p>
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <div class="testimonial-text">"I have lupus so I'm extremely careful about what touches my food. Knowing TAIMA has zero coatings and zero chemicals gives me genuine peace of mind every single meal. For anyone with an autoimmune condition, this pan is a must."</div>
-        <div class="testimonial-author">— Sandra M. &nbsp;·&nbsp; Portland, OR &nbsp;·&nbsp; Verified Purchase</div>
+      <div class="test-header">
+        <span class="sup">Trusted Worldwide</span>
+        <h2>Thousands of Households Are Already Cooking Toxin-Free</h2>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <div class="testimonial-text">"I went through two ceramic pans in one year and cast iron that kept rusting no matter what I did. Switched to TAIMA and haven't looked back. It's light, clean and actually lasts."</div>
-        <div class="testimonial-author">— Derek T. &nbsp;·&nbsp; Austin, TX &nbsp;·&nbsp; Verified Purchase</div>
+      <div class="tcard">
+        <div class="ts">★★★★★</div>
+        <div class="tt">"I have lupus so I'm extremely careful about what touches my food. Knowing TAIMA has zero coatings and zero chemicals gives me genuine peace of mind every single meal. For anyone with an autoimmune condition, this pan is a must."</div>
+        <div class="ta">— Sandra M. · Portland, OR · Verified Purchase</div>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <div class="testimonial-text">"Stainless steel was destroying my meals — everything burned on one side and stuck to the bottom. TAIMA heats so evenly it almost feels like cheating haha."</div>
-        <div class="testimonial-author">— Brenda K. &nbsp;·&nbsp; Columbus, OH &nbsp;·&nbsp; Verified Purchase</div>
+      <div class="tcard">
+        <div class="ts">★★★★★</div>
+        <div class="tt">"I went through two ceramic pans in one year and cast iron that kept rusting no matter what I did. Switched to TAIMA and haven't looked back. It's light, clean and actually lasts."</div>
+        <div class="ta">— Derek T. · Austin, TX · Verified Purchase</div>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <div class="testimonial-text">"I've been a professional chef for 13 years and I'm extremely picky about cookware. TAIMA's heat distribution is exceptional, it cooks food beautifully, nothing sticks, and the food genuinely tastes better."</div>
-        <div class="testimonial-author">— Marco R. &nbsp;·&nbsp; New York, NY &nbsp;·&nbsp; Verified Purchase</div>
+      <div class="tcard">
+        <div class="ts">★★★★★</div>
+        <div class="tt">"Stainless steel was destroying my meals — everything burned on one side and stuck to the bottom. TAIMA heats so evenly it almost feels like cheating haha."</div>
+        <div class="ta">— Brenda K. · Columbus, OH · Verified Purchase</div>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <div class="testimonial-text">"After losing my father to cancer I started questioning everything in our kitchen, especially our old non-stick pans. TAIMA was a turning point. No coatings or chemicals, just pure titanium. I finally feel like I'm protecting my family."</div>
-        <div class="testimonial-author">— Christine L. &nbsp;·&nbsp; Sacramento, CA &nbsp;·&nbsp; Verified Purchase</div>
+      <div class="tcard">
+        <div class="ts">★★★★★</div>
+        <div class="tt">"I've been a professional chef for 13 years and I'm extremely picky about cookware. TAIMA's heat distribution is exceptional, it cooks food beautifully, nothing sticks, and the food genuinely tastes better."</div>
+        <div class="ta">— Marco R. · New York, NY · Verified Purchase</div>
+      </div>
+
+      <div class="tcard">
+        <div class="ts">★★★★★</div>
+        <div class="tt">"After losing my father to cancer I started questioning everything in our kitchen, especially our old non-stick pans. TAIMA was a turning point. No coatings or chemicals, just pure titanium. I finally feel like I'm protecting my family."</div>
+        <div class="ta">— Christine L. · Sacramento, CA · Verified Purchase</div>
       </div>
 
       <!-- ─── SECTION 7: INVESTMENT ─── -->
       <hr class="divider">
+      <h2 class="sh">The Investment Your Body Will Thank You For</h2>
 
-      <h2 class="section-head">The Investment Your Body Will Thank You For</h2>
-
-      <div class="body-text">
-        <p>Titanium cookware isn't the cheapest option on the shelf — and there's a good reason for that.</p>
-        <p>The raw material itself costs more, and the manufacturing process demands a level of precision that most cookware brands simply don't invest in.</p>
+      <div class="prose">
+        <p>Titanium cookware isn't the cheapest option on the shelf — and there's a good reason for that. The raw material itself costs more, and the manufacturing process demands precision that most cookware brands simply don't invest in.</p>
         <p>But here's what that investment actually delivers:</p>
       </div>
 
       <ul class="checklist">
-        <li><span class="check-ico">✔</span> A pan that lasts a lifetime — no warping, peeling, or replacing every year</li>
-        <li><span class="check-ico">✔</span> Zero risk of toxic coatings breaking down into your food</li>
-        <li><span class="check-ico">✔</span> Even, reliable heat for consistently better meals</li>
-        <li><span class="check-ico">✔</span> A cooking surface that locks in nutrients instead of contaminating them</li>
+        <li><span class="ck">✔</span> A pan that lasts a lifetime — no warping, peeling, or replacing every year</li>
+        <li><span class="ck">✔</span> Zero risk of toxic coatings breaking down into your food</li>
+        <li><span class="ck">✔</span> Even, reliable heat for consistently better meals</li>
+        <li><span class="ck">✔</span> A cooking surface that locks in nutrients instead of contaminating them</li>
       </ul>
 
-      <!-- Photo 7 -->
-      <div class="img-placeholder h-invest">
-        <span class="ph-icon">📷</span>
-        <span class="ph-label">Photo 7</span>
-        <span class="ph-desc">Value / investment comparison visual — cost over time or lifestyle shot</span>
+      <div class="img-ph h260">
+        <span class="ico">📷</span>
+        <span class="lbl">Photo 7</span>
+        <span class="desc">Value / investment comparison visual — cost over time or lifestyle shot</span>
       </div>
 
-      <div class="body-text">
+      <div class="prose">
         <p>Think about what you've spent replacing cheap non-stick pans over the years. The scratched coatings. The replacements. The health trade-offs you didn't even know you were making.</p>
         <p>TAIMA® changes that equation completely.</p>
-        <p>Right now, it offers <strong>50% off</strong> for the Certified Pure Titanium Classic Pan — a product built to last a lifetime, sourced from premium materials, and manufactured with surgical-grade precision.</p>
+        <p>Right now, it offers <strong>50% off</strong> for the Certified Pure Titanium Classic Pan — a product built to last a lifetime, manufactured with surgical-grade precision.</p>
         <p>Most premium cookware brands don't offer discounts like this. Ever.</p>
-        <p>Every order still comes fully backed by TAIMA®'s <strong>lifetime warranty</strong>, because a pan built to last should be guaranteed to last.</p>
-        <p>Plus, TAIMA® has a <strong>30-day return policy</strong>, so you can try it risk-free and feel the difference for yourself.</p>
+        <p>Every order still comes fully backed by TAIMA®'s <strong>lifetime warranty</strong> and a <strong>30-day return policy</strong> — so you can try it completely risk-free.</p>
       </div>
 
-      <!-- ─── OFFER BANNER ─── -->
-      <div class="offer-banner" id="offer">
-        <div class="offer-badge">Special Offer for Our Readers</div>
-        <div class="offer-logo-placeholder">TAIMA® Logo</div>
-        <div class="offer-title">TAIMA® Titanium Pan</div>
-        <div class="offer-subtitle">Limited Time &nbsp;·&nbsp; Only On This Page</div>
-        <div class="offer-pct">50% OFF</div>
-        <div class="offer-pct-label">Certified Pure Titanium Classic Pan</div>
-        <a href="#" class="btn-offer">Check Availability →</a>
-        <div class="offer-guarantees">
+      <!-- ── ALERT BANNER #2 (pre-final CTA) ── -->
+      <div class="alert-banner">
+        <span class="ab-icon">⚡</span>
+        <div class="ab-body">
+          <span class="ab-tag">Stock Alert</span>
+          <div class="ab-text">TAIMA® is SELLING OUT faster than expected. This 50% discount is only available for our readers — and only while stock lasts.</div>
+          <a href="#offer" class="ab-cta">Lock In Your Order →</a>
+        </div>
+      </div>
+
+      <!-- ── FINAL OFFER BANNER ── -->
+      <div class="final-offer" id="offer">
+        <span class="fo-badge">Special Offer for Our Readers</span>
+        <div class="fo-logo">TAIMA® Logo</div>
+        <div class="fo-title">TAIMA® Titanium Pan</div>
+        <div class="fo-sub">Limited Time &nbsp;·&nbsp; Only On This Page</div>
+        <div class="fo-pct">50% OFF</div>
+        <div class="fo-pct-lbl">Certified Pure Titanium Classic Pan</div>
+        <a href="#" class="fo-btn">Check Availability →</a>
+        <div class="fo-trust">
           <span>✓ Lifetime Warranty</span>
           <span>✓ 30-Day Return Policy</span>
           <span>✓ Fast Worldwide Shipping</span>
         </div>
       </div>
 
-    </article>
-  </div><!-- /container -->
+    </main><!-- /article-col -->
+
+    <!-- ═══════════════════════════════════════
+         SIDEBAR COLUMN
+         ═══════════════════════════════════════ -->
+    <aside class="sidebar-col">
+      <div class="sidebar-sticky">
+
+        <!-- Main offer widget -->
+        <div class="sb-widget">
+          <div class="sb-badge">Limited Time Offer</div>
+
+          <!-- Product image placeholder -->
+          <div class="sb-img">
+            <span>📷</span>
+            <span>Product Photo</span>
+          </div>
+
+          <div class="sb-body">
+            <div class="sb-logo">TAIMA® Logo</div>
+            <div class="sb-pct">50% OFF</div>
+            <div class="sb-pct-lbl">Save Up To 50%</div>
+            <div class="sb-page-lbl">Only On This Page</div>
+            <div class="sb-stars">★★★★★</div>
+            <div class="sb-rating-lbl">4,889 Verified Reviews</div>
+            <a href="#offer" class="sb-btn">Check Availability →</a>
+            <div class="sb-trust">
+              <div>✓ Lifetime Warranty</div>
+              <div>✓ 30-Day Return Policy</div>
+              <div>✓ Free Worldwide Shipping</div>
+              <div>✓ Secure Checkout</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature summary -->
+        <div class="sb-info">
+          <div class="sb-info-title">Why TAIMA®?</div>
+          <ul>
+            <li>99.86% Grade 1 Pure Titanium</li>
+            <li>Zero PFAS, coatings or chemicals</li>
+            <li>Medical-grade safe</li>
+            <li>5-Ply heat distribution</li>
+            <li>SlipScale™ non-stick surface</li>
+            <li>Lasts a lifetime</li>
+          </ul>
+        </div>
+
+      </div>
+    </aside>
+
+  </div><!-- /page-outer -->
 
   <!-- ═══════════════════════════════════════════
        FOOTER
        ═══════════════════════════════════════════ -->
   <footer>
-    <div class="container">
+    <div class="footer-inner">
       <div class="footer-links">
         <a href="#">About Us</a>
         <a href="#">Terms of Use</a>
@@ -1070,11 +1198,11 @@
         <a href="#">Privacy Notice for California Residents</a>
         <a href="#">Do Not Sell My Personal Information</a>
       </div>
-      <div class="footer-disclaimer">
-        <p><strong>MEDICAL DISCLAIMER:</strong> This article is written for educational purposes only and is not intended as medical advice. The information presented here does not constitute professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. The statements on this page have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
-        <p>Results mentioned in testimonials may not be typical. Individual results may vary. References to specific products or brands do not constitute medical endorsement.</p>
+      <div class="footer-disc">
+        <p><strong>MEDICAL DISCLAIMER:</strong> This article is written for educational purposes only and is not intended as medical advice. The information presented here does not constitute professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Statements on this page have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+        <p>Results mentioned in testimonials may not be typical. Individual results may vary.</p>
       </div>
-      <div class="footer-copyright">©2024–2026 Kitchen Health Journal. All Rights Reserved. &nbsp;·&nbsp; This is a paid advertorial.</div>
+      <div class="footer-copy">©2024–2026 Kitchen Health Journal. All Rights Reserved. &nbsp;·&nbsp; This is a paid advertorial.</div>
     </div>
   </footer>
 
