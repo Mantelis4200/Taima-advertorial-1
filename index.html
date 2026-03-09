@@ -397,43 +397,171 @@
     }
     .alert-band a.ab-cta:hover { background: var(--brown-dk); }
 
-    /* Mid-article offer box */
-    .mid-offer {
-      border: 1.5px solid var(--divider);
-      background: #fff;
-      padding: 22px 22px 18px;
-      margin: 32px 0;
-      text-align: center;
+    /* ── Health Risk Box ── */
+    .health-risk-box {
+      background: #fff8f8;
+      border: 1.5px solid #f5c0c0;
+      border-radius: 6px;
+      margin: 16px 0 24px;
+      overflow: hidden;
     }
-    .mo-badge {
-      display: inline-block;
-      background: var(--brown);
+    .health-risk-box li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 18px;
+      border-bottom: 1px solid #f5e0e0;
+      font-size: 15px;
+      font-weight: 600;
+      color: #c0392b;
+    }
+    .health-risk-box li:last-child { border-bottom: none; }
+    .health-risk-box li .warn-icon { font-size: 17px; flex-shrink: 0; }
+
+    /* ── Cookware Comparison Table ── */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+    .comp-table thead th {
+      background: #111;
       color: #fff;
-      font-size: 9px;
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: .12em;
       text-transform: uppercase;
-      padding: 3px 11px;
-      margin-bottom: 12px;
     }
-    .mo-title { font-family: var(--serif); font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; margin-bottom: 4px; color: var(--near-black); line-height: 1.2; }
-    .mo-sub   { font-size: 12px; color: #999; margin-bottom: 14px; letter-spacing: .05em; }
-    .mo-pct   { font-family: var(--serif); font-size: 48px; font-weight: 800; color: var(--brown-dk); line-height: 1; margin-bottom: 14px; }
+    .comp-table tbody tr { border-bottom: 1px solid #eeeeee; }
+    .comp-table tbody tr:last-child { border-bottom: none; background: #f6fff6; }
+    .comp-table td { padding: 13px 14px; vertical-align: top; line-height: 1.55; }
+    .comp-table .ct-name {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-weight: 700; color: #111; white-space: nowrap;
+      min-width: 160px;
+    }
+    .ct-icon-bad  { color: #c0392b; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .ct-icon-good { color: #27ae60; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .comp-table .ct-prob-bad  { color: #c0392b; font-weight: 500; }
+    .comp-table .ct-prob-good { color: #27ae60; font-weight: 500; }
+
+    /* ── Mid-article Offer Box (redesigned) ── */
+    .mid-offer {
+      position: relative;
+      border: 1.5px dashed #c0392b;
+      background: #fff;
+      border-radius: 6px;
+      padding: 28px 20px 22px;
+      margin: 40px 0;
+    }
+    .mo-badge {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #c0392b;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      padding: 6px 18px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .mo-inner {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .mo-img {
+      flex-shrink: 0;
+      width: 200px;
+      height: 200px;
+      background: #1a1a1a;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mo-img img { width: 100%; height: 100%; object-fit: cover; }
+    .mo-right { flex: 1; min-width: 0; }
+    .mo-headline {
+      font-size: clamp(17px, 2.5vw, 22px);
+      font-weight: 800;
+      color: #c0392b;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .mo-sub { font-size: 13px; color: #555; margin-bottom: 12px; line-height: 1.5; }
+    .mo-deal-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #c0392b;
+      margin-bottom: 6px;
+    }
+    .mo-countdown {
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+      margin-bottom: 14px;
+    }
+    .mo-cd-unit { text-align: center; }
+    .mo-cd-num {
+      display: block;
+      font-size: 32px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      min-width: 44px;
+    }
+    .mo-cd-lbl {
+      display: block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #999;
+      margin-top: 3px;
+    }
+    .mo-cd-sep {
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+      padding: 0 2px;
+      line-height: 1.1;
+    }
     .mo-btn {
-      display: inline-block;
-      background: var(--black);
+      display: block;
+      background: #2d7a2e;
       color: #fff;
       text-decoration: none;
-      padding: 13px 32px;
-      font-size: 13px;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: .07em;
-      text-transform: uppercase;
+      border-radius: 5px;
       transition: background .2s;
       cursor: pointer;
+      margin-bottom: 10px;
     }
-    .mo-btn:hover { background: var(--brown-dk); }
-    .mo-trust { font-size: 11px; color: #aaa; margin-top: 10px; line-height: 1.9; }
+    .mo-btn:hover { background: #245f25; }
+    .mo-meta { font-size: 12px; color: #555; line-height: 2.1; }
+    .mo-meta .risk-bar { display: inline-flex; gap: 3px; margin-left: 4px; vertical-align: middle; }
+    .mo-meta .risk-dot { width: 10px; height: 10px; border-radius: 2px; }
+    .mo-guarantee { font-size: 13px; font-weight: 600; color: #333; margin-top: 8px; border-top: 1px solid #f0f0f0; padding-top: 8px; }
+    @media (max-width: 600px) {
+      .mo-inner { flex-direction: column; }
+      .mo-img { width: 100%; height: 180px; }
+    }
 
     /* ─────────────────────────────────────────────
        TESTIMONIALS  — exact reference spec
@@ -788,12 +916,13 @@
       <p>So dangerous that it has been linked to:</p>
     </div>
 
-    <ul class="blist">
-      <li><span class="icon" style="color:var(--danger);">▲</span> Thyroid disease</li>
-      <li><span class="icon" style="color:var(--danger);">▲</span> Liver &amp; kidney dysfunction</li>
-      <li><span class="icon" style="color:var(--danger);">▲</span> Infertility</li>
-      <li><span class="icon" style="color:var(--danger);">▲</span> Autoimmune diseases</li>
-      <li><span class="icon" style="color:var(--danger);">▲</span> Prostate cancer</li>
+    <ul class="health-risk-box">
+      <li><span class="warn-icon">⚠️</span> Thyroid disease</li>
+      <li><span class="warn-icon">⚠️</span> Liver &amp; kidney dysfunction</li>
+      <li><span class="warn-icon">⚠️</span> Infertility</li>
+      <li><span class="warn-icon">⚠️</span> Autoimmune diseases</li>
+      <li><span class="warn-icon">⚠️</span> Prostate cancer</li>
+      <li><span class="warn-icon">⚠️</span> Fetal developmental risks during pregnancy</li>
     </ul>
 
     <div class="prose">
@@ -861,13 +990,32 @@
       <p>That's why so many people are walking away from non-stick and putting their trust in ceramic, cast iron, or stainless steel instead. Unfortunately, even these options are not safe enough:</p>
     </div>
 
-    <img src="./images/photo-5.jpg" alt="Cookware comparison — ceramic, cast iron, stainless steel" class="img-ph h220">
-
-    <ul class="blist">
-      <li><span class="icon" style="color:var(--danger);">✕</span><span><strong>Ceramic-Coated Pans:</strong> lose their coating within 1–2 years, quickly exposing harmful heavy metals that can leach into food.</span></li>
-      <li><span class="icon" style="color:var(--danger);">✕</span><span><strong>Stainless Steel Pans:</strong> many contain nickel &amp; chromium, causing allergic reactions &amp; hormone disruption.</span></li>
-      <li><span class="icon" style="color:var(--danger);">✕</span><span><strong>Cast Iron Pans:</strong> high risk of rust and can leach excessive iron into food, leading to organ damage in sensitive individuals.</span></li>
-    </ul>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Cookware Type</th>
+          <th>The Problem</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="ct-name"><span class="ct-icon-bad">✕</span> Ceramic-Coated Pans</div></td>
+          <td class="ct-prob-bad">Coating cracks and wears off within 1–2 years, exposing toxic compounds underneath that leach directly into food</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name"><span class="ct-icon-bad">✕</span> Stainless Steel Pans</div></td>
+          <td class="ct-prob-bad">Contains nickel &amp; chromium — linked to hormone disruption, allergic reactions, and Alzheimer's disease</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name"><span class="ct-icon-bad">✕</span> Cast Iron Pans</div></td>
+          <td class="ct-prob-bad">High rust risk; leaches excessive iron into food, leading to iron overload and organ damage</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name"><span class="ct-icon-good">✓</span> Pure Titanium</div></td>
+          <td class="ct-prob-good">Zero PFAS, zero coatings, zero heavy metals. The same material trusted inside the human body</td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- SECTION 5 -->
     <hr>
@@ -933,11 +1081,37 @@
     <!-- MID-ARTICLE OFFER BOX -->
     <div class="mid-offer" id="offer-mid">
       <span class="mo-badge">Special Offer for Our Readers</span>
-      <div class="mo-title">TAIMA® Titanium Pan</div>
-      <div class="mo-sub">Limited Time · Only On This Page</div>
-      <div class="mo-pct">50% OFF</div>
-      <a href="#offer" class="mo-btn">Check Availability →</a>
-      <div class="mo-trust">✓ Lifetime Warranty &nbsp;&nbsp; ✓ 30-Day Return Policy &nbsp;&nbsp; ✓ Free Worldwide Shipping</div>
+      <div class="mo-inner">
+        <div class="mo-img">
+          <img src="./images/product-mid.jpg" alt="TAIMA® Titanium Pan">
+        </div>
+        <div class="mo-right">
+          <div class="mo-headline">Last Chance To<br>Save 50% + Free Gift</div>
+          <div class="mo-sub">This limited-time deal is in high demand and stock keeps selling out.</div>
+          <div class="mo-deal-label">Limited Time Deal</div>
+          <div class="mo-countdown">
+            <div class="mo-cd-unit"><span class="mo-cd-num" id="mo-h">04</span><span class="mo-cd-lbl">Hours</span></div>
+            <span class="mo-cd-sep">:</span>
+            <div class="mo-cd-unit"><span class="mo-cd-num" id="mo-m">31</span><span class="mo-cd-lbl">Minutes</span></div>
+            <span class="mo-cd-sep">:</span>
+            <div class="mo-cd-unit"><span class="mo-cd-num" id="mo-s">49</span><span class="mo-cd-lbl">Seconds</span></div>
+          </div>
+          <a href="#offer" class="mo-btn">Check Availability →</a>
+          <div class="mo-meta">
+            <div>🚚 <strong>FREE Shipping</strong></div>
+            <div>⏱ Sell-Out Risk: <strong>HIGH</strong>
+              <span class="risk-bar">
+                <span class="risk-dot" style="background:#c0392b;"></span>
+                <span class="risk-dot" style="background:#ddd;"></span>
+                <span class="risk-dot" style="background:#ddd;"></span>
+                <span class="risk-dot" style="background:#ddd;"></span>
+                <span class="risk-dot" style="background:#ddd;"></span>
+              </span>
+            </div>
+          </div>
+          <div class="mo-guarantee">Try it today with a 30-Day Money Back Guarantee</div>
+        </div>
+      </div>
     </div>
 
     <!-- TESTIMONIALS -->
@@ -1136,6 +1310,15 @@
 </div><!-- /page-grid -->
 
 <!-- ═══════════════════════════════════════════════
+     BOTTOM UPDATE BANNER
+     ═══════════════════════════════════════════════ -->
+<div class="urgency-banner" style="margin-top:0;">
+  <div class="urgency-inner">
+    <strong class="tag">UPDATE (March 2026):</strong> Demand for the TAIMA® Titanium Pan has increased dramatically and inventory is flying off the shelves. Order for <strong class="hl">50% OFF + FAST SHIPPING</strong> before it's too late.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
      FOOTER
      ═══════════════════════════════════════════════ -->
 <footer>
@@ -1156,13 +1339,35 @@
 </footer>
 
 <script>
-  // Sticky bottom bar show/hide
+  // Sticky bottom bar
   (function() {
     var bar = document.querySelector('.bot-bar');
     if (!bar) return;
     window.addEventListener('scroll', function() {
       bar.classList.toggle('show', window.scrollY > 500);
     }, { passive: true });
+  })();
+
+  // Mid-offer countdown (sessionStorage-persisted)
+  (function() {
+    var key = 'taima_mo_end';
+    var end = sessionStorage.getItem(key);
+    if (!end) {
+      end = Date.now() + (4 * 3600 + 31 * 60 + 49) * 1000;
+      sessionStorage.setItem(key, end);
+    } else { end = parseInt(end); }
+    function p(n) { return n < 10 ? '0' + n : '' + n; }
+    function tick() {
+      var d = Math.max(0, end - Date.now());
+      var h = document.getElementById('mo-h');
+      var m = document.getElementById('mo-m');
+      var s = document.getElementById('mo-s');
+      if (h) h.textContent = p(Math.floor(d / 3600000));
+      if (m) m.textContent = p(Math.floor((d % 3600000) / 60000));
+      if (s) s.textContent = p(Math.floor((d % 60000) / 1000));
+      if (d > 0) setTimeout(tick, 1000);
+    }
+    tick();
   })();
 </script>
 </body>
