@@ -58,65 +58,27 @@
       color: var(--body-color);
       line-height: 1.78;
       -webkit-font-smoothing: antialiased;
-      padding-top: var(--top-h);
       padding-bottom: var(--bot-h);
     }
 
     /* ─────────────────────────────────────────────
-       FIXED TOP SALE BAR
+       URGENCY BANNER (inline, yellow)
        ───────────────────────────────────────────── */
-    .top-sale-bar {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 400;
-      background: #8B2635;
-      height: var(--top-h);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 20px;
+    .urgency-banner {
+      background: #fffbea;
+      border: 1.5px solid #f5c842;
+      padding: 13px 20px;
+      margin: 0;
     }
-    .tsb-inner {
-      width: 100%;
+    .urgency-inner {
       max-width: calc(var(--article-max) + var(--sidebar-w) + var(--gap) + 40px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #3a2a00;
     }
-    .tsb-sale { text-align: center; line-height: 1.2; flex-shrink: 0; }
-    .tsb-sale-title { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; display: block; color: #fff; }
-    .tsb-sale-sub   { font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.78); display: block; }
-    .tsb-countdown  { display: flex; align-items: center; gap: 3px; flex-shrink: 0; }
-    .cd-unit {
-      background: rgba(0,0,0,.4);
-      border: 1px solid rgba(255,255,255,.18);
-      padding: 4px 9px;
-      text-align: center;
-      min-width: 44px;
-      border-radius: 3px;
-    }
-    .cd-num { display: block; font-size: 17px; font-weight: 700; line-height: 1.1; color: #fff; font-variant-numeric: tabular-nums; }
-    .cd-lbl { display: block; font-size: 9px; font-weight: 600; letter-spacing: .1em; color: rgba(255,255,255,.65); text-transform: uppercase; }
-    .cd-sep { font-size: 18px; font-weight: 700; color: rgba(255,255,255,.55); padding-bottom: 8px; }
-    .tsb-btn {
-      background: #f5f0e8;
-      color: #1a1a1a;
-      text-decoration: none;
-      padding: 9px 18px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .03em;
-      white-space: nowrap;
-      flex-shrink: 0;
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: background .2s;
-      cursor: pointer;
-    }
-    .tsb-btn:hover { background: #fff; }
+    .urgency-inner strong.tag { color: #c0392b; font-weight: 800; }
+    .urgency-inner strong.hl  { color: #c0392b; font-weight: 700; }
 
     /* ─────────────────────────────────────────────
        FIXED BOTTOM CTA BAR
@@ -153,131 +115,93 @@
     .bot-bar a:hover { background: var(--brown-dk); }
 
     /* ─────────────────────────────────────────────
-       HERO BANNER  (dark, full-width)
+       ARTICLE HEADER ELEMENTS
        ───────────────────────────────────────────── */
-    .hero {
-      background: #111;
-      color: #fff;
+    .art-category {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 12px;
+    }
+    .article-h1 {
+      font-family: var(--sans);
+      font-size: clamp(26px, 4vw, 46px);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -.02em;
+      color: #111;
+      margin-bottom: 18px;
+    }
+    /* Hero image wrap with AS SEEN ON strip */
+    .hero-img-wrap {
+      margin: 22px 0 0;
       overflow: hidden;
     }
-    .hero-inner {
-      max-width: calc(var(--article-max) + var(--sidebar-w) + var(--gap) + 40px);
-      margin: 0 auto;
-      padding: 28px 20px 0;
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      align-items: end;
-      min-height: 270px;
+    .hero-img-wrap img,
+    .hero-img-wrap .hero-ph {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      display: block;
+      background: #d5dde3;
     }
-    .hero-left { padding: 0 28px 28px 0; }
-    .hero-trust {
+    .as-seen-on {
+      background: #1a1a1a;
+      padding: 13px 18px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 14px;
-      font-size: 12px;
-      font-weight: 400;
-      color: rgba(255,255,255,.65);
+      gap: 18px;
+      flex-wrap: wrap;
     }
-    .hero-trust svg { width: 14px; height: 14px; flex-shrink: 0; opacity: .7; }
-    .hero-trust .sep { color: rgba(255,255,255,.25); }
-    .hero-h1 {
-      font-family: var(--sans);
-      font-size: clamp(20px, 2.8vw, 34px);
+    .aso-label {
+      font-size: 10px;
       font-weight: 700;
-      line-height: 1.28;
-      letter-spacing: -.01em;
-      color: #fff;
-      margin-bottom: 22px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      white-space: nowrap;
     }
-    .hero-author {
-      display: inline-flex;
+    .aso-logos {
+      display: flex;
       align-items: center;
-      gap: 11px;
-      background: #fff;
-      color: #111;
-      padding: 9px 16px;
-      border-radius: 40px;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-    .hero-avatar {
-      width: 34px; height: 34px;
+    .aso-logo {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,.75);
+      letter-spacing: .03em;
+      white-space: nowrap;
+    }
+    .aso-logo.boxed {
+      border: 1.5px solid rgba(255,255,255,.5);
+      padding: 2px 7px;
+    }
+    /* Author byline */
+    .author-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0 12px;
+      border-bottom: 1px solid #ebebeb;
+      margin-bottom: 20px;
+    }
+    .author-avatar {
+      width: 40px; height: 40px;
       border-radius: 50%;
-      background: #ddd;
-      border: 2px solid var(--brown-lt);
+      background: #9e9e9e;
       flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
       font-size: 13px;
-      color: var(--brown);
-    }
-    .hero-author-text .by  { font-size: 13px; font-weight: 600; line-height: 1.3; }
-    .hero-author-text .by .chk { color: #2563EB; }
-    .hero-author-text .dt  { font-size: 11px; color: #555; }
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding-top: 12px;
-    }
-    .hero-prod {
-      width: 100%;
-      height: 200px;
-      background: rgba(255,255,255,.04);
-      border: 1.5px dashed rgba(200,190,171,.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      color: rgba(200,190,171,.55);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-    }
-    .hero-prod svg { width: 28px; height: 28px; opacity: .35; }
-    .hero-brand {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      padding: 12px 0 10px;
-    }
-    .hero-cert {
-      width: 50px; height: 50px;
-      border-radius: 50%;
-      border: 1.5px dashed rgba(200,190,171,.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 6.5px;
       font-weight: 700;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      color: rgba(200,190,171,.55);
-      text-align: center;
-      line-height: 1.5;
-    }
-    .hero-name .n1 {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: .06em;
       color: #fff;
-      display: block;
-      line-height: 1;
+      letter-spacing: .03em;
     }
-    .hero-name .n2 {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .3em;
-      color: var(--brown-lt);
-      display: block;
-      margin-top: 3px;
-    }
+    .author-meta .name { font-size: 13.5px; font-weight: 700; color: #111; line-height: 1.3; }
+    .author-meta .role { font-size: 12px; color: #888; }
 
     /* ─────────────────────────────────────────────
        PAGE GRID
@@ -612,94 +536,116 @@
        SIDEBAR
        ───────────────────────────────────────────── */
     .sidebar { padding-top: 22px; }
-    .sb-sticky { position: sticky; top: calc(var(--top-h) + 14px); }
+    .sb-sticky { position: sticky; top: 18px; }
 
     .sb-widget {
       background: #fff;
-      border: 1px solid #e5e5e5;
-      border-top: 3px solid var(--brown);
+      border: 1px solid #e0e0e0;
       overflow: hidden;
     }
-    .sb-top-badge {
-      background: var(--brown);
-      color: #fff;
+    /* Offer header */
+    .sb-offer-hdr {
       text-align: center;
-      padding: 6px;
+      padding: 14px 16px 0;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: .1em;
+      letter-spacing: .14em;
       text-transform: uppercase;
+      color: #999;
     }
-    .sb-img {
+    .sb-save-line {
+      text-align: center;
+      padding: 6px 16px 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.3;
+    }
+    .sb-save-line span { color: #c0392b; }
+    .sb-img-wrap {
+      position: relative;
       width: 100%;
-      height: 200px;
-      background: #f8f8f8;
-      border-bottom: 1px dashed #e0e0e0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      color: #bbb;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .07em;
-      text-transform: uppercase;
+      height: 190px;
+      background: #eaeaea;
+      margin-top: 10px;
+      overflow: hidden;
     }
-    .sb-img svg { width: 24px; height: 24px; opacity: .35; }
-    .sb-body { padding: 16px 14px 18px; }
-    .sb-logo {
-      width: 95px; height: 26px;
-      border: 1px dashed #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8.5px;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: #ccc;
-      margin: 0 auto 12px;
+    .sb-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .sb-off-badge {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: #c0392b;
+      color: #fff;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; line-height: 1.1;
+      text-align: center;
     }
-    .sb-pct  { text-align: center; font-family: var(--serif); font-size: 48px; font-weight: 800; color: var(--brown-dk); line-height: 1; margin-bottom: 2px; }
-    .sb-pct-l{ text-align: center; font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #888; margin-bottom: 5px; }
-    .sb-page { text-align: center; font-size: 11px; color: var(--brown); font-weight: 600; margin-bottom: 12px; }
-    .sb-stars{ text-align: center; color: var(--test-star); font-size: 13px; letter-spacing: 2px; margin-bottom: 3px; }
-    .sb-rl   { text-align: center; font-size: 11px; color: #999; margin-bottom: 14px; }
-    .sb-btn {
+    .sb-off-badge small { font-size: 8px; font-weight: 600; }
+    .sb-cta-btn {
       display: block;
-      background: var(--black);
+      background: #2d7a2e;
       color: #fff;
       text-decoration: none;
       text-align: center;
-      padding: 13px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .07em;
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
       text-transform: uppercase;
       transition: background .2s;
-      margin-bottom: 10px;
+      margin: 14px 14px 0;
+      border-radius: 4px;
       cursor: pointer;
     }
-    .sb-btn:hover { background: var(--brown-dk); }
-    .sb-trust {
-      font-size: 10px;
-      color: #999;
-      line-height: 2.1;
+    .sb-cta-btn:hover { background: #245f25; }
+    /* Reviews section */
+    .sb-reviews-hdr {
       text-align: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #999;
+      padding: 14px 16px 8px;
       border-top: 1px solid #f0f0f0;
-      padding-top: 10px;
+      margin-top: 14px;
     }
-
-    .sb-why {
-      background: #fafafa;
-      border: 1px solid #efefef;
-      padding: 14px;
-      margin-top: 12px;
+    .sb-rating-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px 4px;
     }
-    .sb-why-title { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #666; margin-bottom: 8px; }
-    .sb-why ul { list-style: none; font-size: 12px; line-height: 2.0; color: #777; }
-    .sb-why ul li::before { content: '✓ '; font-weight: 700; color: var(--success); }
+    .sb-r-stars { color: var(--test-star); font-size: 14px; letter-spacing: 1px; }
+    .sb-r-score { font-size: 14px; font-weight: 700; color: #111; }
+    .sb-r-outof { font-size: 13px; color: #555; }
+    .sb-r-count { font-size: 11px; color: #999; padding: 0 16px 10px; }
+    .sb-bars { padding: 4px 16px 16px; }
+    .sb-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+      font-size: 11px;
+      color: #555;
+    }
+    .sb-bar-label { width: 38px; flex-shrink: 0; }
+    .sb-bar-track {
+      flex: 1;
+      height: 7px;
+      background: #e8e8e8;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .sb-bar-fill {
+      height: 100%;
+      background: var(--test-star);
+      border-radius: 4px;
+    }
+    .sb-bar-pct { width: 28px; text-align: right; flex-shrink: 0; }
 
     /* ─────────────────────────────────────────────
        FOOTER
@@ -746,26 +692,17 @@
     @media (max-width: 900px) {
       .page-grid { grid-template-columns: 1fr; }
       .sidebar { display: none; }
-      .meta-bar { flex-direction: column; gap: 2px; text-align: center; }
-      .hero-inner { grid-template-columns: 1fr; min-height: auto; }
-      .hero-right { display: none; }
-      .hero-left { padding-right: 0; }
-    }
-    @media (max-width: 640px) {
-      .tsb-inner { gap: 10px; }
-      .tsb-sale-title { font-size: 11px; }
-      .cd-num { font-size: 15px; }
-      .cd-unit { min-width: 38px; padding: 3px 7px; }
-      .tsb-btn { padding: 8px 12px; font-size: 11px; }
     }
     @media (max-width: 520px) {
       .bot-bar { flex-direction: column; height: auto; padding: 10px 14px; gap: 7px; text-align: center; }
       body { --bot-h: 90px; }
       .final-banner { padding: 28px 16px; }
+      .as-seen-on { gap: 10px; }
+      .aso-logos { gap: 12px; }
     }
 
     @media print {
-      .top-sale-bar, .bot-bar, .sidebar { display: none; }
+      .bot-bar, .sidebar { display: none; }
       body { padding: 0; }
     }
   </style>
@@ -773,22 +710,11 @@
 <body>
 
 <!-- ═══════════════════════════════════════════════
-     TOP SALE BAR
+     URGENCY BANNER
      ═══════════════════════════════════════════════ -->
-<div class="top-sale-bar">
-  <div class="tsb-inner">
-    <div class="tsb-sale">
-      <span class="tsb-sale-title">Special Reader Offer</span>
-      <span class="tsb-sale-sub">Save 50% Today</span>
-    </div>
-    <div class="tsb-countdown">
-      <div class="cd-unit"><span class="cd-num" id="cd-h">02</span><span class="cd-lbl">HRS</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-num" id="cd-m">36</span><span class="cd-lbl">MIN</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-num" id="cd-s">58</span><span class="cd-lbl">SEC</span></div>
-    </div>
-    <a href="#offer" class="tsb-btn">Check Availability →</a>
+<div class="urgency-banner">
+  <div class="urgency-inner">
+    <strong class="tag">UPDATE:</strong> TAIMA® Titanium Pan is <strong class="hl">SELLING OUT</strong> faster than expected! Lock in your order NOW to get <strong class="hl">50% OFF + FAST SHIPPING</strong> worldwide!
   </div>
 </div>
 
@@ -803,73 +729,54 @@
   <a href="#offer">Claim Discount →</a>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     HERO BANNER
-     ═══════════════════════════════════════════════ -->
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-trust">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-        <span>Expert Reviewed</span>
-        <span class="sep">|</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-        <span>Evidence Based</span>
-      </div>
-      <h1 class="hero-h1">Scientists Are Calling It A Silent Public Health Crisis&nbsp;– And It's Hiding In Your Kitchen Right Now</h1>
-      <div class="hero-author">
-        <div class="hero-avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="hero-author-text">
-          <div class="by">By <strong>Dr. Elena Carter, MPH</strong> <span class="chk">✓</span></div>
-          <div class="dt">Published on <strong>Wednesday, Mar 5</strong></div>
-        </div>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-prod">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-        <span>Product Photo</span>
-      </div>
-      <div class="hero-brand">
-        <div class="hero-cert">CERTIFIED<br>ORIGINAL<br>CERTIFIED</div>
-        <div class="hero-name">
-          <span class="n1">TAIMA®</span>
-          <span class="n2">TITANIUM</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ═══════════════════════════════════════════════
      PAGE GRID  (article + sidebar)
      ═══════════════════════════════════════════════ -->
 <div class="page-grid">
 
-  <!-- META BAR (full width) -->
-  <div class="meta-bar">
-    <span>Kitchen Health Journal</span>
-    <span>Health &amp; Wellness · Cookware Safety</span>
-    <span>Paid Advertorial</span>
-  </div>
-
   <!-- ─────────────────  ARTICLE  ───────────────── -->
   <main class="article">
 
-    <p class="disclaimer">This article is written for educational purposes only and is not intended as medical advice. If you have specific health concerns, consult a qualified medical professional.</p>
+    <div class="art-category">Health &amp; Kitchen Safety &nbsp;·&nbsp; Environmental Health Report</div>
+
+    <h1 class="article-h1">Scientists Are Calling It A Silent Public Health Crisis — And It's In Your Kitchen</h1>
 
     <div class="warn-box">
-      <span class="wtag">⚠ Warning</span>
-      <p>If you cook with non-stick pans daily – and you've never questioned what those coatings are actually made of – this may be the most important article you read this year…</p>
+      <p>WARNING: If you cook with non-stick pans daily — and you've never questioned what those coatings are actually made of — this may be the most important article you read this year…</p>
     </div>
 
     <div class="ratings-row">
       <span class="r-stars">★★★★</span><span style="color:var(--test-star);font-size:14px;">½</span>
       <span class="r-score">4,889</span>
-      <span class="r-count">Verified Reader Reviews</span>
+      <span class="r-count">Ratings</span>
     </div>
+
+    <!-- HERO IMAGE + AS SEEN ON -->
+    <div class="hero-img-wrap">
+      <img src="./images/hero.jpg" alt="TAIMA Titanium Pan lifestyle shot" class="hero-ph">
+      <div class="as-seen-on">
+        <span class="aso-label">As Seen On:</span>
+        <div class="aso-logos">
+          <span class="aso-logo">abc</span>
+          <span class="aso-logo">Forbes</span>
+          <span class="aso-logo">&#9711;CBS</span>
+          <span class="aso-logo">NBC</span>
+          <span class="aso-logo boxed">USA TODAY</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUTHOR BYLINE -->
+    <div class="author-line">
+      <div class="author-avatar">EC</div>
+      <div class="author-meta">
+        <div class="name">Dr. Elena Carter, MPH</div>
+        <div class="role">Environmental Health Specialist &amp; Research Advisor &nbsp;·&nbsp; March 5th, 2026</div>
+      </div>
+    </div>
+
+    <p class="disclaimer">This article is written for educational purposes only and is not intended as medical advice. If you have specific health concerns, consult a qualified medical professional.</p>
 
     <!-- INTRO -->
     <div class="prose">
@@ -1175,42 +1082,54 @@
   <!-- ─────────────────  SIDEBAR  ───────────────── -->
   <aside class="sidebar">
     <div class="sb-sticky">
-
       <div class="sb-widget">
-        <div class="sb-top-badge">Limited Time Offer</div>
-        <div class="sb-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-          <span>Product Photo</span>
+        <div class="sb-offer-hdr">Limited Time Offer</div>
+        <div class="sb-save-line">Save Up To <span>50%</span><br>Only On This Page</div>
+
+        <div class="sb-img-wrap">
+          <img src="./images/product-sidebar.jpg" alt="TAIMA® Titanium Pan">
+          <div class="sb-off-badge"><small>50%</small>OFF</div>
         </div>
-        <div class="sb-body">
-          <div class="sb-logo">TAIMA® Logo</div>
-          <div class="sb-pct">50% OFF</div>
-          <div class="sb-pct-l">Save Up To 50%</div>
-          <div class="sb-page">Only On This Page</div>
-          <div class="sb-stars">★★★★★</div>
-          <div class="sb-rl">4,889 Verified Reviews</div>
-          <a href="#offer" class="sb-btn">Check Availability →</a>
-          <div class="sb-trust">
-            <div>✓ Lifetime Warranty</div>
-            <div>✓ 30-Day Return Policy</div>
-            <div>✓ Free Worldwide Shipping</div>
-            <div>✓ Secure Checkout</div>
+
+        <a href="#offer" class="sb-cta-btn">Check Availability →</a>
+
+        <div class="sb-reviews-hdr">Customer Reviews</div>
+
+        <div class="sb-rating-row">
+          <span class="sb-r-stars">★★★★</span><span style="color:var(--test-star);font-size:13px;">½</span>
+          <span class="sb-r-score">4.8</span>
+          <span class="sb-r-outof">out of 5</span>
+        </div>
+        <div class="sb-r-count">4,889 customer ratings</div>
+
+        <div class="sb-bars">
+          <div class="sb-bar-row">
+            <span class="sb-bar-label">5 Star</span>
+            <div class="sb-bar-track"><div class="sb-bar-fill" style="width:90%"></div></div>
+            <span class="sb-bar-pct">90%</span>
+          </div>
+          <div class="sb-bar-row">
+            <span class="sb-bar-label">4 Star</span>
+            <div class="sb-bar-track"><div class="sb-bar-fill" style="width:7%"></div></div>
+            <span class="sb-bar-pct">7%</span>
+          </div>
+          <div class="sb-bar-row">
+            <span class="sb-bar-label">3 Star</span>
+            <div class="sb-bar-track"><div class="sb-bar-fill" style="width:2%"></div></div>
+            <span class="sb-bar-pct">2%</span>
+          </div>
+          <div class="sb-bar-row">
+            <span class="sb-bar-label">2 Star</span>
+            <div class="sb-bar-track"><div class="sb-bar-fill" style="width:1%"></div></div>
+            <span class="sb-bar-pct">0%</span>
+          </div>
+          <div class="sb-bar-row">
+            <span class="sb-bar-label">1 Star</span>
+            <div class="sb-bar-track"><div class="sb-bar-fill" style="width:1%"></div></div>
+            <span class="sb-bar-pct">1%</span>
           </div>
         </div>
       </div>
-
-      <div class="sb-why">
-        <div class="sb-why-title">Why TAIMA®?</div>
-        <ul>
-          <li>99.86% Grade 1 Pure Titanium</li>
-          <li>Zero PFAS, coatings or chemicals</li>
-          <li>Medical-grade safe</li>
-          <li>5-Ply heat distribution</li>
-          <li>SlipScale™ non-stick surface</li>
-          <li>Lasts a lifetime</li>
-        </ul>
-      </div>
-
     </div>
   </aside>
 
@@ -1237,22 +1156,13 @@
 </footer>
 
 <script>
+  // Sticky bottom bar show/hide
   (function() {
-    var key = 'taima_adv_end';
-    var end = sessionStorage.getItem(key);
-    if (!end) {
-      end = Date.now() + (2 * 3600 + 36 * 60 + 58) * 1000;
-      sessionStorage.setItem(key, end);
-    } else { end = parseInt(end); }
-    function p(n) { return n < 10 ? '0' + n : '' + n; }
-    function tick() {
-      var d = Math.max(0, end - Date.now());
-      document.getElementById('cd-h').textContent = p(Math.floor(d / 3600000));
-      document.getElementById('cd-m').textContent = p(Math.floor((d % 3600000) / 60000));
-      document.getElementById('cd-s').textContent = p(Math.floor((d % 60000) / 1000));
-      if (d > 0) setTimeout(tick, 1000);
-    }
-    tick();
+    var bar = document.querySelector('.bot-bar');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+      bar.classList.toggle('show', window.scrollY > 500);
+    }, { passive: true });
   })();
 </script>
 </body>
